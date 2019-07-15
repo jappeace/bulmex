@@ -2,9 +2,9 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 0d01c604fef7ec4a33ea04350e130c68f8e27a7fc4c63c2cdea64cd4e4fb5a15
+-- hash: 2481383ad471e2bb79d1a53fa127c79d3d28d2f12fef84660d03b2455396a808
 
-name:           src
+name:           bulmex
 version:        1.0.0.0
 description:    Please see the README on GitHub at <https://github.com/githubuser/awesome-project-name#readme>
 homepage:       https://github.com/jappeace/bulmex#readme
@@ -28,7 +28,7 @@ library
   exposed-modules:
       Reflex.Bulmex.Event
   other-modules:
-      Paths_src
+      Paths_bulmex
   hs-source-dirs:
       src
   ghc-options: -Werror -Wall -Wcompat -Wincomplete-uni-patterns -Widentities
