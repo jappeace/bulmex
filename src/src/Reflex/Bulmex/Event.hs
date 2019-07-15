@@ -16,7 +16,7 @@ import qualified Reflex.Dom.Widget.Basic  as Dom
 eventJoin :: (Reflex t, MonadHold t m) => Event t (Event t a) -> m (Event t a)
 eventJoin = switchHold never
 
- -- | Block those nothing events and only let trough just a's
+ -- | Block those nothing events and only let trough 'Just' values
 noNothing :: (Filterable f, Filterable f) => f (Maybe a) -> f a
 noNothing = fmapMaybe id
 
