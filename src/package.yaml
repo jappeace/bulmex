@@ -1,6 +1,6 @@
-name:                common
+name:                src
 version:             1.0.0.0
-github:              "jappeace/awesome-project-name"
+github:              "jappeace/bulmex"
 license:             MIT
 author:              "Jappie Klooster"
 maintainer:          "jappieklooster@hotmail.com"
@@ -23,12 +23,11 @@ ghc-options: -Werror -Wall -Wcompat -Wincomplete-uni-patterns -Widentities
 
 dependencies:
 - base >= 4.7 && < 5
-- aeson # json
-- text
-- servant
-- cookie
-- servant-auth
-- bytestring
+- reflex >= 0.6.1 && < 0.7
+- reflex-dom
+- time
+- witherable
+
 
 library:
   source-dirs: src

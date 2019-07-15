@@ -2,43 +2,40 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 9be3d5f45323cbd5330acd0d115f899bb18e3277e33f8f64c58ed5a89af6d334
+-- hash: 0d01c604fef7ec4a33ea04350e130c68f8e27a7fc4c63c2cdea64cd4e4fb5a15
 
-cabal-version:  >= 1.10
-name:           common
+name:           src
 version:        1.0.0.0
 description:    Please see the README on GitHub at <https://github.com/githubuser/awesome-project-name#readme>
-homepage:       https://github.com/jappeace/awesome-project-name#readme
-bug-reports:    https://github.com/jappeace/awesome-project-name/issues
+homepage:       https://github.com/jappeace/bulmex#readme
+bug-reports:    https://github.com/jappeace/bulmex/issues
 author:         Jappie Klooster
 maintainer:     jappieklooster@hotmail.com
 copyright:      2018 Jappie Klooster
 license:        MIT
 license-file:   LICENSE
 build-type:     Simple
+cabal-version:  >= 1.10
 extra-source-files:
     ChangeLog.md
     README.md
 
 source-repository head
   type: git
-  location: https://github.com/jappeace/awesome-project-name
+  location: https://github.com/jappeace/bulmex
 
 library
+  exposed-modules:
+      Reflex.Bulmex.Event
+  other-modules:
+      Paths_src
   hs-source-dirs:
       src
   ghc-options: -Werror -Wall -Wcompat -Wincomplete-uni-patterns -Widentities
   build-depends:
-      aeson
-    , base >=4.7 && <5
-    , bytestring
-    , cookie
-    , servant
-    , servant-auth
-    , text
-  exposed-modules:
-      Common
-      Common.Xsrf
-  other-modules:
-      Paths_common
+      base >=4.7 && <5
+    , reflex >=0.6.1 && <0.7
+    , reflex-dom
+    , time
+    , witherable
   default-language: Haskell2010
