@@ -16,11 +16,11 @@ import qualified Reflex.Dom.Widget.Basic  as Dom
 eventJoin :: (Reflex t, MonadHold t m) => Event t (Event t a) -> m (Event t a)
 eventJoin = switchHold never
 
- -- | Block those nothing events and only let trough 'Just' values
+-- | Block those nothing events and only let trough 'Just' values
 noNothing :: (Filterable f, Filterable f) => f (Maybe a) -> f a
 noNothing = fmapMaybe id
 
- -- | Do something monadic with an event val
+-- | Do something monadic with an event val
 --   Because of haskell lazyness the things inside a holdevent
 --   don't get evaluated untill the event fires, which makes the first
 --   time slow. However it is good for initialization as we don't
@@ -33,21 +33,21 @@ holdEvent ::
   -> m (Dynamic t b)
 holdEvent val evt fun = Dom.widgetHold (pure val) $ fun <$> evt
 
- -- | Convenience holdEvent for the case where we don't care about the
+-- | Convenience holdEvent for the case where we don't care about the
 --   value.
 holdEvent_ ::
      (Dom.DomBuilder t m, MonadHold t m) => Event t a -> (a -> m b) -> m ()
 holdEvent_ = fmap void . holdEvent undefined -- we throw away the value
 
 
- -- | Get rid of a dynimc around a tupple of events,
+-- | Get rid of a dynimc around a tupple of events,
 --   common sense says we should be able to do this for any traversable,
 --   but keeping the values of events hetrogenous is hard (I don't know how to)
 switchTup ::
      (Reflex t) => Dynamic t (Event t b, Event t c) -> (Event t b, Event t c)
 switchTup tup = (switchDyn $ fst <$> tup, switchDyn $ snd <$> tup)
 
- -- | Do something monadic with an event val, and get the event which is
+-- | Do something monadic with an event val, and get the event which is
 --  delayed for a moment.
 --  Using this may indicate you're doing something weird.
 --  Although I've found it handy in getting just something to work
@@ -65,7 +65,7 @@ holdAfter ::
   -> m (Dynamic t b)
 holdAfter val evt fun = delay 0 evt >>= holdEvent val evt . flip fun
 
- -- | show something for 5 seconds after an event
+-- | show something for 5 seconds after an event
 flash ::
      (Monoid c, Dom.DomBuilder t m, PerformEvent t m, MonadHold t m, TriggerEvent t m, (MonadIO (Performable m)))
   => Event t b
