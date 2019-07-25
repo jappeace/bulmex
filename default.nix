@@ -5,11 +5,11 @@ let reflex-platform = builtins.fetchGit {
     };
 in (import reflex-platform { }).project ({ pkgs, ... }: {
     packages = {
-        src = ./src;
+        bulmex = ./bulmex;
     };
 
     shells = {
-        ghc = ["src"];
-        # ghcjs = ["src" ];
+        ghc = ["bulmex"];
+        ghcjs = ["bulmex" ];
     };
 })

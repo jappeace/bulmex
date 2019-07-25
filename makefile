@@ -6,7 +6,7 @@ file-watch:
 	scripts/watch.sh
 
 update-cabal:
-	hpack ./src
+	hpack ./bulmex
 
 EXTRA=""
 enter:
