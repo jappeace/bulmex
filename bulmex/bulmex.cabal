@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: cdac9d44529cca259cd9cce3a412885ffb9654cadb530715dd21e65e08e5a346
+-- hash: 9b2a436951f6dcaf94de72ca8e2d2f1eefed34f7cb60c9e7b3227e2020d7035d
 
 name:           bulmex
 version:        1.0.0.0
@@ -28,17 +28,22 @@ library
   exposed-modules:
       Reflex.Bulmex.Event
       Reflex.Bulmex.Input.Polymorphic
+      Reflex.Bulmex.Load
   other-modules:
       Paths_bulmex
   hs-source-dirs:
       src
   ghc-options: -Werror -Wall -Wcompat -Wincomplete-uni-patterns -Widentities
   build-depends:
-      base >=4.7 && <5
+      aeson
+    , base >=4.7 && <5
+    , bytestring
     , containers
+    , jsaddle
+    , jsaddle-dom
     , lens
     , reflex >=0.6.1 && <0.7
-    , reflex-dom
+    , reflex-dom-core >=0.5 && <0.6
     , text
     , time
     , witherable
