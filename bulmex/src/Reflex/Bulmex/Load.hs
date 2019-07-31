@@ -39,4 +39,5 @@ preloadState comelid serverState =
         mayEl' <- sequence $ (getElementById <$> mayDoc) <*> pure comelid
         mayInner  <- sequence $ getInnerHTML <$> join mayEl'
         let result = (join $ decode . LBS.fromStrict .  encodeUtf8 <$> mayInner)
-        pure $ fromMaybe serverState result
+        pure $ fromMaybe serverState  -- TODO don't fail silently
+            result
