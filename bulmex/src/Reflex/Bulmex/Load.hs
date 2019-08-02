@@ -24,9 +24,9 @@ import qualified Reflex.Dom.Widget.Basic              as Dom
 --   in case of the server side rendering we encode it as script tag with jsonval,
 --   in case of ghcjsdom we read the value from that script tag
 --   first arg is the idname to connect the two up (has to be uniq for a doc)
-preloadState :: (FromJSON a, ToJSON a, Dom.DomBuilder t m, Dom.Prerender js t m) =>
+writeReadDom :: (FromJSON a, ToJSON a, Dom.DomBuilder t m, Dom.Prerender js t m) =>
   Text.Text -> a -> m (Dynamic t a)
-preloadState comelid serverState =
+writeReadDom comelid serverState =
   Dom.prerender (do
     Dom.elAttr "script" (Map.fromList [
                             ("type", "application/json"),
