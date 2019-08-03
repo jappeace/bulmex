@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 32928f601c5e077010cf633e31b5988e0f7d8c50a767f542c4841601d77ad98a
+-- hash: f8c5f2ff32f6e6546f9934893d4db251d26cb286e82014efff7f279118033a1e
 
 name:           bulmex
 version:        1.0.0.0
@@ -26,10 +26,14 @@ source-repository head
 
 library
   exposed-modules:
+      Reflex.Bulmex.Attr
       Reflex.Bulmex.Event
       Reflex.Bulmex.Html
       Reflex.Bulmex.Input.Polymorphic
       Reflex.Bulmex.Load
+      Reflex.Bulmex.PreventDefault
+      Reflex.Bulmex.Space
+      Reflex.Bulmex.Tag
   other-modules:
       Paths_bulmex
   hs-source-dirs:
@@ -46,6 +50,7 @@ library
     , network-uri
     , reflex >=0.6.1 && <0.7
     , reflex-dom-core >=0.5 && <0.6
+    , reflex-dom-helpers >=0.2.0.0 && <0.3.0.0
     , text
     , time
     , witherable
