@@ -1,7 +1,13 @@
-## Deploy to AWS EC2 with NixOps
+# Bulmex, reflex infused with bulma
 
-* On your AWS console, create a security group called "awesome" in the Oregon region. Give it inbound TCP 22 and 6868 permission.
-* `nixops create -d awesome deployment.nix`
-* `nixops set-args -d awesome --argstr keyPair <your-aws-key.pem>`
-* `nixops set-args -d awesome --argstr accessKeyId <your-aws-access-key>`
-* `nixops deploy -d awesome`
+With a bunch of helper functions such as making server side 
+rendering easier.
+See related [blogpost](https://jappieklooster.nl/reflex-server-side-html-rendering.html).
+
+Reflex: 
+	- core: https://hackage.haskell.org/package/reflex
+	- DOM: https://hackage.haskell.org/package/reflex-dom-core
+
+CSS:
+	- Bulma: https://bulma.io/
+	- Baloon: https://kazzkiq.github.io/balloon.css/
