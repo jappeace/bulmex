@@ -24,15 +24,14 @@ module Reflex.Bulmex.Html
   ) where
 
 import           Control.Lens
-import           Control.Monad                (void)
-import           Data.Foldable                (traverse_)
-import           Data.Generics.Product.Fields
-import qualified Data.Map.Strict              as Map
-import qualified Data.Text                    as Text
-import           GHC.Generics                 (Generic)
+import           Control.Monad            (void)
+import           Data.Foldable            (traverse_)
+import qualified Data.Map.Strict          as Map
+import qualified Data.Text                as Text
+import           GHC.Generics             (Generic)
 import           Network.URI
-import qualified Reflex.Dom.Builder.Class     as Dom
-import qualified Reflex.Dom.Widget            as Dom
+import qualified Reflex.Dom.Builder.Class as Dom
+import qualified Reflex.Dom.Widget        as Dom
 
 -- | Adds the core html tags.
 --   we already know most of the head.
@@ -57,13 +56,13 @@ data HeadSettings = HeadSettings
   } deriving (Generic, Show)
 
 head_js :: Lens' HeadSettings [HeadScript]
-head_js = field @"_head_js"
+head_js = lens _head_js $ \x b -> x{_head_js=b}
 
 head_css :: Lens' HeadSettings [URI]
-head_css = field @"_head_css"
+head_css = lens _head_css $ \x b -> x{_head_css=b}
 
 head_title :: Lens' HeadSettings Text.Text
-head_title = field @"_head_title"
+head_title = lens _head_title $ \x b -> x{_head_title=b}
 
 data HeadScript = HeadScript
   { _script_is_async :: Bool
@@ -77,10 +76,10 @@ defScript = HeadScript {
   }
 
 script_uri :: Lens' HeadScript URI
-script_uri = field @"_script_uri"
+script_uri = lens _script_uri $ \x b -> x{_script_uri=b}
 
 script_is_async :: Lens' HeadScript Bool
-script_is_async = field @"_script_is_async"
+script_is_async = lens _script_is_async $ \x b -> x{_script_is_async=b}
 
 isasync :: (Text.Text, Text.Text)
 isasync = ("async","true")

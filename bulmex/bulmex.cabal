@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: e46c8f78770346e81c1c60a2e6469f4d4c56830e910d865b07562462befa231a
+-- hash: 32928f601c5e077010cf633e31b5988e0f7d8c50a767f542c4841601d77ad98a
 
 name:           bulmex
 version:        1.0.0.0
@@ -40,7 +40,6 @@ library
     , base >=4.7 && <5
     , bytestring
     , containers
-    , generic-lens
     , jsaddle
     , jsaddle-dom
     , lens
