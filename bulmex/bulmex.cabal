@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 9b2a436951f6dcaf94de72ca8e2d2f1eefed34f7cb60c9e7b3227e2020d7035d
+-- hash: e46c8f78770346e81c1c60a2e6469f4d4c56830e910d865b07562462befa231a
 
 name:           bulmex
 version:        1.0.0.0
@@ -27,6 +27,7 @@ source-repository head
 library
   exposed-modules:
       Reflex.Bulmex.Event
+      Reflex.Bulmex.Html
       Reflex.Bulmex.Input.Polymorphic
       Reflex.Bulmex.Load
   other-modules:
@@ -39,9 +40,11 @@ library
     , base >=4.7 && <5
     , bytestring
     , containers
+    , generic-lens
     , jsaddle
     , jsaddle-dom
     , lens
+    , network-uri
     , reflex >=0.6.1 && <0.7
     , reflex-dom-core >=0.5 && <0.6
     , text
