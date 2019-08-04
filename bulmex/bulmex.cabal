@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 1a71acbfa5abf1d94e0f30ba43e99a389465967d837d3d47390ea6d437267938
+-- hash: 7ad363aeeb4dbec7eb437a7271d72c40c62de0a0af25f75ce786c73633816977
 
 name:           bulmex
 version:        2.0.0
@@ -32,8 +32,6 @@ library
       Reflex.Bulmex.Event
       Reflex.Bulmex.Html
       Reflex.Bulmex.Input.Polymorphic
-      Reflex.Bulmex.Load
-      Reflex.Bulmex.PreventDefault
       Reflex.Bulmex.Space
       Reflex.Bulmex.Tag
       Reflex.Bulmex.Tag.Abstract

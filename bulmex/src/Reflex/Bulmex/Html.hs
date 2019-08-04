@@ -7,7 +7,8 @@
 
 -- | A root for an app,
 --   usefull for server side html rendering.
---   has a neat api for the head tag, use this if that api your needs.
+--   has a neat api for the head tag, use this if that api suits your needs.
+--   For more info see blogpost: https://jappieklooster.nl/reflex-server-side-html-rendering.html
 module Reflex.Bulmex.Html
   ( htmlWidget
   -- * Head tag stuff
@@ -21,20 +22,43 @@ module Reflex.Bulmex.Html
   -- * Defaults
   , defScript
   , defSettings
+  -- * Load
+  , writeReadDom
   ) where
 
 import           Control.Lens
-import           Control.Monad            (void)
-import           Data.Foldable            (traverse_)
-import qualified Data.Map.Strict          as Map
-import qualified Data.Text                as Text
-import           GHC.Generics             (Generic)
+import           Control.Monad                        (void)
+import           Control.Monad                        (join)
+import           Data.Aeson
+import           Data.Aeson.Text
+import qualified Data.ByteString.Lazy                 as LBS
+import           Data.Foldable                        (traverse_)
+import qualified Data.Map.Strict                      as Map
+import           Data.Maybe
+import qualified Data.Text                            as Text
+import           Data.Text.Encoding
+import qualified Data.Text.Lazy                       as LText
+import           GHC.Generics                         (Generic)
+import           JSDOM
+import           JSDOM.Generated.Element
+import           JSDOM.Generated.NonElementParentNode
 import           Network.URI
-import qualified Reflex.Dom.Builder.Class as Dom
-import qualified Reflex.Dom.Widget        as Dom
+import           Reflex
+import qualified Reflex.Dom.Builder.Class             as Dom
+import qualified Reflex.Dom.Prerender                 as Dom
+import qualified Reflex.Dom.Widget                    as Dom
 
 -- | Adds the core html tags.
 --   we already know most of the head.
+--
+-- >  <html>
+-- >    <head>
+-- >     'HeadSettings' <!-- provided settings --!>
+-- >    </head>
+-- >    <body>
+-- >    'm a' <!-- provided monad --!>
+-- >    </body>
+-- >  </html>
 htmlWidget :: (Dom.DomBuilder t m) => HeadSettings -> m a -> m a
 htmlWidget settings content =
   Dom.el "html" $ do
@@ -108,3 +132,25 @@ headWidget settings = do
          (Map.fromList -- bulmo
             [("rel", "stylesheet"), ("href", href)])
          Dom.blank) $ settings ^.. head_css . traversed . to (Text.pack . show)
+
+-- | Insert an encodable in the document body,
+--   in case of the server side rendering we encode it as script tag with jsonval,
+--   in case of ghcjsdom we read the value from that script tag
+--   first arg is the idname to connect the two up (has to be uniq for a doc)
+writeReadDom :: (FromJSON a, ToJSON a, Dom.DomBuilder t m, Dom.Prerender js t m) =>
+  Text.Text -> a -> m (Dynamic t a)
+writeReadDom comelid serverState =
+  Dom.prerender (do
+    Dom.elAttr "script" (Map.fromList [
+                            ("type", "application/json"),
+                            ("id", comelid)
+                            ]) $
+      Dom.text $ LText.toStrict $ encodeToLazyText serverState
+    pure serverState
+    ) $ do
+        mayDoc <- currentDocument
+        mayEl' <- sequence $ (getElementById <$> mayDoc) <*> pure comelid
+        mayInner  <- sequence $ getInnerHTML <$> join mayEl'
+        let result = (join $ decode . LBS.fromStrict .  encodeUtf8 <$> mayInner)
+        pure $ fromMaybe serverState  -- TODO don't fail silently
+            result
