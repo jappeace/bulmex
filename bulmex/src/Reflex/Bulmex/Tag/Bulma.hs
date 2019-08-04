@@ -2,7 +2,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE RankNTypes        #-}
 
--- | Bulma styled tags
+-- | Bulma styled tags: https://bulma.io/
 module Reflex.Bulmex.Tag.Bulma
   (
   -- * Layout
@@ -51,6 +51,7 @@ import           Reflex.Bulmex.Tag.Abstract
 import qualified Reflex.Dom.Builder.Class   as Dom
 import qualified Reflex.Tags                as T
 
+-- | Container: https://bulma.io/documentation/layout/container/
 container :: Dom.DomBuilder t m => m a -> m a
 container = containerClass mempty
 
@@ -60,12 +61,12 @@ containerClass = partialDiv "container"
 buttons :: Dom.DomBuilder t m => m a -> m a
 buttons = T.divClass "buttons"
 
--- | bulma hero sturcture
--- @
---  <section class="hero">
---   <div class="hero-body">
---      <div class="container">
--- @
+-- | bulma hero sturcture https://bulma.io/documentation/layout/hero/
+--
+-- > <section class="hero">
+-- >  <div class="hero-body">
+-- >    <div class="container">
+
 hero :: Dom.DomBuilder t m => Text.Text -> m a -> m a
 hero styles =
   txtEl T.sectionClass "hero" styles . T.divClass "hero-body" . container
@@ -76,6 +77,7 @@ content = T.divClass "content"
 sect :: (Dom.DomBuilder t m) => m a -> m a
 sect = T.divClass "section"
 
+-- | https://bulma.io/documentation/layout/section/
 section :: (PostBuild t m, Dom.DomBuilder t m) => m a -> m a
 section = sectionDyn $ constDyn mempty
 
@@ -84,6 +86,7 @@ sectionDyn ::
 sectionDyn =
   dynAttrEl (\a b -> T.divDynAttr a $ container b) $ classAttr "section"
 
+-- | https://bulma.io/documentation/columns/
 columns :: Dom.DomBuilder t m => m a -> m a
 columns = columnsClass mempty
 
@@ -106,6 +109,7 @@ controlDyn ::
      (PostBuild t m, Dom.DomBuilder t m) => Dynamic t AttrMap -> m a -> m a
 controlDyn = dynAttrEl T.divDynAttr $ classAttr "control"
 
+-- | https://bulma.io/documentation/layout/tiles/
 tile :: Dom.DomBuilder t m => Text.Text -> m a -> m a
 tile = partialDiv "tile"
 
