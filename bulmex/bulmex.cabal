@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: f8c5f2ff32f6e6546f9934893d4db251d26cb286e82014efff7f279118033a1e
+-- hash: 8318e28769a43a2d09b62854a6c29172a32f8cc89a559dd4a713362b4a1182e7
 
 name:           bulmex
 version:        1.0.0.0
@@ -50,7 +50,7 @@ library
     , network-uri
     , reflex >=0.6.1 && <0.7
     , reflex-dom-core >=0.5 && <0.6
-    , reflex-dom-helpers >=0.2.0.0 && <0.3.0.0
+    , reflex-dom-helpers >=0.2.0.1 && <0.3.0.0
     , text
     , time
     , witherable
