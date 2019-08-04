@@ -1,6 +1,6 @@
 # Bulmex, reflex infused with bulma
 
-With a bunch of helper functions such as making server side 
+With a bunch of helper functions for making server side 
 rendering easier.
 See related [blogpost](https://jappieklooster.nl/reflex-server-side-html-rendering.html).
 
