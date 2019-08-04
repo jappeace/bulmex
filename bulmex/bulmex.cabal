@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 8fca172a43d519ab445403b973bc06ebee5bddddb58346d783abb9cc5539fb37
+-- hash: 2b99255d36d075b833dc8c72472ac37a01a82e94c211ebc8955bb3075e4f5d12
 
 name:           bulmex
 version:        1.0.0
@@ -40,7 +40,7 @@ library
       Paths_bulmex
   hs-source-dirs:
       src
-  ghc-options: -Werror -Wall -Wcompat -Wincomplete-uni-patterns -Widentities
+  ghc-options: -Wall -Wcompat -Wincomplete-uni-patterns -Widentities
   build-depends:
       aeson
     , base >=4.7 && <5
