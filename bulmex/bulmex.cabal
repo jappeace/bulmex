@@ -2,10 +2,10 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: cf969714e01502e076ec79660420d123fc89496452b515e5540ea46506243fd3
+-- hash: 8fca172a43d519ab445403b973bc06ebee5bddddb58346d783abb9cc5539fb37
 
 name:           bulmex
-version:        1.0.0.0
+version:        1.0.0
 synopsis:       Reflex infused with bulma (css)
 description:    Please see the README on GitHub at <https://github.com/githubuser/awesome-project-name#readme>
 category:       Web
