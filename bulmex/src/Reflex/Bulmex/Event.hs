@@ -1,5 +1,6 @@
-{-# LANGUAGE FlexibleContexts #-}
-{-# LANGUAGE RankNTypes       #-}
+{-# LANGUAGE FlexibleContexts  #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE RankNTypes        #-}
 
 -- | Helper functions for dealing with events
 module Reflex.Bulmex.Event where
@@ -7,6 +8,7 @@ module Reflex.Bulmex.Event where
 import           Control.Applicative      (empty)
 import           Control.Monad            (void)
 import           Control.Monad.IO.Class   (MonadIO)
+import qualified Data.Text                as Text
 import           Data.Time.Clock          (NominalDiffTime)
 import           Data.Witherable
 import           Reflex
@@ -83,3 +85,6 @@ flash' time defVal event monadFunc = do
   delayed <- delay time event
   holdEvent defVal (leftmost [pure <$> event, empty <$ delayed]) $
     maybe (pure defVal) monadFunc
+
+evtText :: (Dom.DomBuilder t m, PostBuild t m, MonadHold t m) => Event t Text.Text -> m ()
+evtText evt = Dom.dynText =<< holdDyn "" evt

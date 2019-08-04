@@ -2,10 +2,10 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 2b99255d36d075b833dc8c72472ac37a01a82e94c211ebc8955bb3075e4f5d12
+-- hash: 1a71acbfa5abf1d94e0f30ba43e99a389465967d837d3d47390ea6d437267938
 
 name:           bulmex
-version:        1.0.0
+version:        2.0.0
 synopsis:       Reflex infused with bulma (css)
 description:    Please see the README on GitHub at <https://github.com/githubuser/awesome-project-name#readme>
 category:       Web
@@ -36,6 +36,12 @@ library
       Reflex.Bulmex.PreventDefault
       Reflex.Bulmex.Space
       Reflex.Bulmex.Tag
+      Reflex.Bulmex.Tag.Abstract
+      Reflex.Bulmex.Tag.Bulma
+      Reflex.Bulmex.Tag.Hide
+      Reflex.Bulmex.Tag.Icon
+      Reflex.Bulmex.Tag.Odd
+      Reflex.Bulmex.Tag.Tooltip
   other-modules:
       Paths_bulmex
   hs-source-dirs:
