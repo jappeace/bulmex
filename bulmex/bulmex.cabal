@@ -2,12 +2,12 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 7ad363aeeb4dbec7eb437a7271d72c40c62de0a0af25f75ce786c73633816977
+-- hash: 089c8990c38856467650b322c40323301d9c0980cfa2befd720c802ba7bcc592
 
 name:           bulmex
 version:        2.0.0
 synopsis:       Reflex infused with bulma (css)
-description:    Please see the README on GitHub at <https://github.com/githubuser/awesome-project-name#readme>
+description:    Reflex infused with bulma, With a bunch of helper functions such as making server side rendering easier. See related [blogpost](https://jappieklooster.nl/reflex-server-side-html-rendering.html).
 category:       Web
 homepage:       https://github.com/jappeace/bulmex#readme
 bug-reports:    https://github.com/jappeace/bulmex/issues
