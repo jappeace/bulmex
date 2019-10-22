@@ -4,7 +4,6 @@
 
 -- | Bulma styled tags: https://bulma.io/
 module Reflex.Bulmex.Tag.Bulma
-  -- * Layout
   ( container
   , containerClass
   , hero

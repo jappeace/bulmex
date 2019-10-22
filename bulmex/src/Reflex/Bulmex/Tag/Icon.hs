@@ -4,7 +4,6 @@
 
 -- | Icons with material design
 module Reflex.Bulmex.Tag.Icon
-   -- * Icon
   ( icon
   , iconClass
   , iconDyn

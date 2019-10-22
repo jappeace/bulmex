@@ -7,12 +7,12 @@
 --   They also indicate to the child monad how an action is performing
 --   with spinstates.
 module Reflex.Bulmex.Form
-    -- * Spin
-  ( withSpinDyn
+  ( actionForm
+  , form
+  -- * Spin
+  , withSpinDyn
   , spinWidget
   , aSpinButtonClass
-  -- * Action form
-  , actionForm
   -- * Types
   , module X
   ) where

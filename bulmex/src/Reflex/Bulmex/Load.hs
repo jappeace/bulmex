@@ -5,7 +5,6 @@
 -- | Bulma loading screen w/ help of extension:
 --   https://wikiki.github.io/elements/pageloader/
 module Reflex.Bulmex.Load
-    -- * Pageloader
   ( pageLoader
   , prerenderLoad
   -- * Load tricks
@@ -27,6 +26,11 @@ import qualified Reflex.Tags                as T
 
 pageLoader :: DomBuilder t m => Text.Text -> m a -> m a
 pageLoader = partialDiv "pageloader"
+
+-- | show a spinning image while loading JS
+prerenderLoad :: (Prerender js t m, DomBuilder t m) => m () -> m ()
+prerenderLoad spinner =
+  void $ prerender (T.divClass "prerender-load" $ spinner) Dom.blank
 
 postpone :: (DomBuilder t m, MonadHold t m) => Event t () -> m () -> m ()
 postpone evt m = holdEvent_ evt (const m)
@@ -57,8 +61,3 @@ withReadyEvt mb = do
   res <- mb
   evt <- getReady
   pure (res, evt)
-
--- | show a spinning image while loading JS
-prerenderLoad :: (Prerender js t m, DomBuilder t m) => m () -> m ()
-prerenderLoad spinner =
-  void $ prerender (T.divClass "prerender-load" $ spinner) Dom.blank

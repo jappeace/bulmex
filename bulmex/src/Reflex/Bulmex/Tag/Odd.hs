@@ -6,7 +6,6 @@
 -- | Odd tag helpers, these have uncommen html attributes
 --   They don't fit in the 'normal' pattern of Abstract
 module Reflex.Bulmex.Tag.Odd
-  -- * Image
   ( image
   , imageClass
   -- * Link

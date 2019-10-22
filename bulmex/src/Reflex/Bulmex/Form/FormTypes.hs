@@ -6,12 +6,12 @@
 module Reflex.Bulmex.Form.FormTypes
   ( FormAction(..)
   , SpinState(..)
+  -- * Prisms
   , _PostDefault
   , _Loading
   , _FormRest
   ) where
 
--- * Prisms
 import           Control.Lens
 import           Data.Generics.Sum
 import           GHC.Generics      (Generic)
