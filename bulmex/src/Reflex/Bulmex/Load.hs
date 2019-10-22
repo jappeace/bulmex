@@ -2,7 +2,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE RecursiveDo       #-}
 
--- | Bulma loading screen w/ help of extension:
+-- | Bulma loading screen with help of extension:
 --   https://wikiki.github.io/elements/pageloader/
 module Reflex.Bulmex.Load
   ( pageLoader
@@ -27,7 +27,7 @@ import qualified Reflex.Tags                as T
 pageLoader :: DomBuilder t m => Text.Text -> m a -> m a
 pageLoader = partialDiv "pageloader"
 
--- | show a spinning image while loading JS
+-- | show input monad while JS is loading, for example a spinning image
 prerenderLoad :: (Prerender js t m, DomBuilder t m) => m () -> m ()
 prerenderLoad spinner =
   void $ prerender (T.divClass "prerender-load" $ spinner) Dom.blank

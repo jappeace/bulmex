@@ -33,9 +33,14 @@ import qualified Reflex.Dom.Widget            as Dom
 import qualified Reflex.Tags                  as T
 import qualified Web.KeyCode                  as Dom
 
--- | This will make send on enter work for a form.
---   Gives a spinstate to a form and hooks up onenter press to it
---   use actReqButton for sane defaults
+-- | The first argument is a function that expects data `a`,
+--   and a trigger event, producing another event in a monadic context.
+--   This perfectly aligns with servant-reflex.
+--   The produced event is given to the form, the second argument.
+--   which also includes the 'SpinState', indicating if we're
+--   exeecuting the event or not.
+--   The form has to return 3 values, firstly `a` the information for the first function,
+--   The is the event that controls the form, and the third is an optional return value.
 actionForm ::
      (Dom.DomBuilder t m, MonadHold t m, MonadFix m)
   => (a -> Event t () -> m (Event t b))
@@ -63,7 +68,7 @@ spinState ::
 spinState start stop =
   accumDyn (const id) SpinRest $ leftmost [Spinning <$ start, SpinRest <$ stop]
 
--- | This looks a lot like `withDebounceEvtReq`, maybe a better abstraction is possible?
+-- This looks a lot like `withDebounceEvtReq`, maybe a better abstraction is possible?
 spinWidget ::
      ( Dom.DomBuilder t m
      , PerformEvent t m
