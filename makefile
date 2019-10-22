@@ -18,4 +18,5 @@ run: create-db
 clean:
 	rm -fR dist dist-*
 
-
+ghcid:
+	nix-shell --run "ghcid -s \"import Main\" -c \"make update-cabal && cabal new-repl \" -T \"main\" test:unit"

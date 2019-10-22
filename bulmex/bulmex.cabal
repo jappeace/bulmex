@@ -1,8 +1,10 @@
--- This file has been generated from package.yaml by hpack version 0.28.2.
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.31.2.
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: ff65f5447cccce6ee9bed9f2913c5cfb43a800f93be78f0fc411b1c89f46ab8b
+-- hash: c982e91a94bae0ecf5133d2690cdc9548e810b16709b093cbd30af782da48e63
 
 name:           bulmex
 version:        2.0.0
@@ -17,10 +19,9 @@ copyright:      2018 Jappie Klooster
 license:        MIT
 license-file:   LICENSE
 build-type:     Simple
-cabal-version:  >= 1.10
 extra-source-files:
-    ChangeLog.md
     README.md
+    ChangeLog.md
 
 source-repository head
   type: git
@@ -50,6 +51,47 @@ library
     , base >=4.7 && <5
     , bytestring
     , containers
+    , jsaddle
+    , jsaddle-dom
+    , lens
+    , network-uri
+    , reflex >=0.6.1 && <0.7
+    , reflex-dom-core >=0.5 && <0.6
+    , reflex-dom-helpers >=0.2.0.1 && <0.3.0.0
+    , text
+    , time
+    , witherable
+  default-language: Haskell2010
+
+test-suite unit
+  type: exitcode-stdio-1.0
+  main-is: Spec.hs
+  other-modules:
+      Test.TestSpec
+      Reflex.Bulmex.Attr
+      Reflex.Bulmex.Event
+      Reflex.Bulmex.Html
+      Reflex.Bulmex.Input.Polymorphic
+      Reflex.Bulmex.Space
+      Reflex.Bulmex.Tag
+      Reflex.Bulmex.Tag.Abstract
+      Reflex.Bulmex.Tag.Bulma
+      Reflex.Bulmex.Tag.Hide
+      Reflex.Bulmex.Tag.Icon
+      Reflex.Bulmex.Tag.Odd
+      Reflex.Bulmex.Tag.Tooltip
+      Paths_bulmex
+  hs-source-dirs:
+      test
+      src
+  ghc-options: -Wall -Wcompat -Wincomplete-uni-patterns -Widentities
+  build-depends:
+      aeson
+    , base >=4.7 && <5
+    , bytestring
+    , containers
+    , hspec
+    , hspec-core
     , jsaddle
     , jsaddle-dom
     , lens
