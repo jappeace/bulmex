@@ -69,6 +69,9 @@ spinState start stop =
   accumDyn (const id) SpinRest $ leftmost [Spinning <$ start, SpinRest <$ stop]
 
 -- This looks a lot like `withDebounceEvtReq`, maybe a better abstraction is possible?
+-- | A more general use of the spinstate.
+--   The first argument is the widget that can indicate when to execute
+--   the second function. It will be made aware of the 'SpinState'.
 spinWidget ::
      ( Dom.DomBuilder t m
      , PerformEvent t m
@@ -120,7 +123,7 @@ aSpinButtonClass clazz spinstate =
 
 -- attrmap
 -- | A form captures enter presses of child componetns and
---   sends it to them
+--   sends it to them in an event.
 form :: (Dom.DomBuilder t m, MonadFix m) => (Event t () -> m a) -> m a
 form monF = do
   rec val <-
