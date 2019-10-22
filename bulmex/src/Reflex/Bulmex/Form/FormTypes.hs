@@ -3,14 +3,15 @@
 {-# LANGUAGE TypeApplications #-}
 
 -- | Types for Form.
-module Reflex.Bulmex.Form.FormTypes(
-  FormAction(..), SpinState(..)
--- * Prisms
+module Reflex.Bulmex.Form.FormTypes
+  ( FormAction(..)
+  , SpinState(..)
   , _PostDefault
   , _Loading
   , _FormRest
-                                   ) where
+  ) where
 
+-- * Prisms
 import           Control.Lens
 import           Data.Generics.Sum
 import           GHC.Generics      (Generic)
@@ -19,7 +20,7 @@ data FormAction
   = PostDefault -- ^ do the post
   | Loading -- ^ trigger spin state without doing default the post
   | FormRest -- ^ stop the spin state
-  deriving Generic
+  deriving (Generic)
 
 _PostDefault :: Prism' FormAction ()
 _PostDefault = _Ctor @"PostDefault"

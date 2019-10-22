@@ -4,9 +4,8 @@
 
 -- | Bulma styled tags: https://bulma.io/
 module Reflex.Bulmex.Tag.Bulma
-  (
   -- * Layout
-    container
+  ( container
   , containerClass
   , hero
   , content
@@ -66,7 +65,6 @@ buttons = T.divClass "buttons"
 -- > <section class="hero">
 -- >  <div class="hero-body">
 -- >    <div class="container">
-
 hero :: Dom.DomBuilder t m => Text.Text -> m a -> m a
 hero styles =
   txtEl T.sectionClass "hero" styles . T.divClass "hero-body" . container

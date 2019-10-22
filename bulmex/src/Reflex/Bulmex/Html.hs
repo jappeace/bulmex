@@ -62,16 +62,12 @@ import qualified Reflex.Dom.Widget                    as Dom
 htmlWidget :: (Dom.DomBuilder t m) => HeadSettings -> m a -> m a
 htmlWidget settings content =
   Dom.el "html" $ do
-    void $ Dom.el "head" $ do
-      headWidget settings
+    void $ Dom.el "head" $ do headWidget settings
     Dom.el "body" $ content
 
 defSettings :: HeadSettings
-defSettings = HeadSettings{
-    _head_js    = mempty
-  , _head_css   = mempty
-  , _head_title = mempty
-  }
+defSettings =
+  HeadSettings {_head_js = mempty, _head_css = mempty, _head_title = mempty}
 
 data HeadSettings = HeadSettings
   { _head_js    :: [HeadScript]
@@ -80,13 +76,13 @@ data HeadSettings = HeadSettings
   } deriving (Generic, Show)
 
 head_js :: Lens' HeadSettings [HeadScript]
-head_js = lens _head_js $ \x b -> x{_head_js=b}
+head_js = lens _head_js $ \x b -> x {_head_js = b}
 
 head_css :: Lens' HeadSettings [URI]
-head_css = lens _head_css $ \x b -> x{_head_css=b}
+head_css = lens _head_css $ \x b -> x {_head_css = b}
 
 head_title :: Lens' HeadSettings Text.Text
-head_title = lens _head_title $ \x b -> x{_head_title=b}
+head_title = lens _head_title $ \x b -> x {_head_title = b}
 
 data HeadScript = HeadScript
   { _script_is_async :: Bool
@@ -94,23 +90,23 @@ data HeadScript = HeadScript
   } deriving (Generic, Show)
 
 defScript :: HeadScript
-defScript = HeadScript {
-    _script_is_async = True
-  , _script_uri = nullURI
-  }
+defScript = HeadScript {_script_is_async = True, _script_uri = nullURI}
 
 script_uri :: Lens' HeadScript URI
-script_uri = lens _script_uri $ \x b -> x{_script_uri=b}
+script_uri = lens _script_uri $ \x b -> x {_script_uri = b}
 
 script_is_async :: Lens' HeadScript Bool
-script_is_async = lens _script_is_async $ \x b -> x{_script_is_async=b}
+script_is_async = lens _script_is_async $ \x b -> x {_script_is_async = b}
 
 isasync :: (Text.Text, Text.Text)
-isasync = ("async","true")
+isasync = ("async", "true")
 
 scriptToMap :: HeadScript -> Map.Map Text.Text Text.Text
-scriptToMap script = Map.fromList $
-    if (script ^. script_is_async) then [isasync, src] else [src]
+scriptToMap script =
+  Map.fromList $
+  if (script ^. script_is_async)
+    then [isasync, src]
+    else [src]
   where
     src = ("src", script ^. script_uri . to (Text.pack . show))
 
@@ -120,37 +116,50 @@ scriptToMap script = Map.fromList $
 --   initially but we put them in different files.
 --   for example we needed the bulma css file for most styling
 --   and balloon css for just tooltips.
-headWidget :: Dom.DomBuilder t m => HeadSettings ->  m ()
+headWidget :: Dom.DomBuilder t m => HeadSettings -> m ()
 headWidget settings = do
-  traverse_ (\attrlist -> Dom.elAttr "script" attrlist Dom.blank) $ settings ^.. head_js .  traversed . to scriptToMap
+  traverse_ (\attrlist -> Dom.elAttr "script" attrlist Dom.blank) $ settings ^..
+    head_js .
+    traversed .
+    to scriptToMap
   -- google complaints about viewport, but it breaks the table
   -- metaAttr (Map.fromList [("name", "viewport"), ("content", "device-width, initial-scale=1")]) Dom.blank
   void $ Dom.el "title" $ Dom.text $ settings ^. head_title
   traverse_
     (\href ->
-       Dom.elAttr "link"
+       Dom.elAttr
+         "link"
          (Map.fromList -- bulmo
             [("rel", "stylesheet"), ("href", href)])
-         Dom.blank) $ settings ^.. head_css . traversed . to (Text.pack . show)
+         Dom.blank) $
+    settings ^..
+    head_css .
+    traversed .
+    to (Text.pack . show)
 
 -- | Insert an encodable in the document body,
 --   in case of the server side rendering we encode it as script tag with jsonval,
 --   in case of ghcjsdom we read the value from that script tag
 --   first arg is the idname to connect the two up (has to be uniq for a doc)
-writeReadDom :: (FromJSON a, ToJSON a, Dom.DomBuilder t m, Dom.Prerender js t m) =>
-  Text.Text -> a -> m (Dynamic t a)
+writeReadDom ::
+     (FromJSON a, ToJSON a, Dom.DomBuilder t m, Dom.Prerender js t m)
+  => Text.Text
+  -> a
+  -> m (Dynamic t a)
 writeReadDom comelid serverState =
-  Dom.prerender (do
-    Dom.elAttr "script" (Map.fromList [
-                            ("type", "application/json"),
-                            ("id", comelid)
-                            ]) $
-      Dom.text $ LText.toStrict $ encodeToLazyText serverState
-    pure serverState
-    ) $ do
-        mayDoc <- currentDocument
-        mayEl' <- sequence $ (getElementById <$> mayDoc) <*> pure comelid
-        mayInner  <- sequence $ getInnerHTML <$> join mayEl'
-        let result = (join $ decode . LBS.fromStrict .  encodeUtf8 <$> mayInner)
-        pure $ fromMaybe serverState  -- TODO don't fail silently
-            result
+  Dom.prerender
+    (do Dom.elAttr
+          "script"
+          (Map.fromList [("type", "application/json"), ("id", comelid)]) $
+          Dom.text $
+          LText.toStrict $
+          encodeToLazyText serverState
+        pure serverState) $ do
+    mayDoc <- currentDocument
+    mayEl' <- sequence $ (getElementById <$> mayDoc) <*> pure comelid
+    mayInner <- sequence $ getInnerHTML <$> join mayEl'
+    let result = (join $ decode . LBS.fromStrict . encodeUtf8 <$> mayInner)
+    pure $
+      fromMaybe
+        serverState -- TODO don't fail silently
+        result

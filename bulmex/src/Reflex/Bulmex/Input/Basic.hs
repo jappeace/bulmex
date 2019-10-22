@@ -24,16 +24,20 @@ import qualified Reflex.Dom.Widget               as Dom
 import qualified Reflex.Tags                     as T
 
 txtArea ::
-  (Dom.DomBuilder t m,
-   PostBuild t m) =>
-  Dom.TextAreaConfig t -> m (TextArea t)
+     (Dom.DomBuilder t m, PostBuild t m)
+  => Dom.TextAreaConfig t
+  -> m (TextArea t)
 txtArea conf =
-  textArea $ conf &
-    Dom.textAreaConfig_attributes %~
-      ((<*>) $ constDyn $ attrUnion $ classAttr "textarea")
+  textArea $
+  conf &
+  Dom.textAreaConfig_attributes %~
+  ((<*>) $ constDyn $ attrUnion $ classAttr "textarea")
 
 -- | Unlabeled text input with input class applied
-txtInput :: (PostBuild t m, Dom.DomBuilder t m) => Dom.TextInputConfig t -> m (TextInput t)
+txtInput ::
+     (PostBuild t m, Dom.DomBuilder t m)
+  => Dom.TextInputConfig t
+  -> m (TextInput t)
 txtInput config =
   textInput
     (config &
@@ -45,13 +49,22 @@ buttonClassAttr = classAttr "button"
 abuttonLarge :: (PostBuild t m, Dom.DomBuilder t m) => m a -> m (Event t ())
 abuttonLarge = fmap fst . abuttonClass "is-large"
 
-abuttonClass :: (PostBuild t m, Dom.DomBuilder t m) => Text.Text -> m a -> m (Event t (), a)
+abuttonClass ::
+     (PostBuild t m, Dom.DomBuilder t m)
+  => Text.Text
+  -> m a
+  -> m (Event t (), a)
 abuttonClass = abutton . classAttr
 
-abutton :: (PostBuild t m, Dom.DomBuilder t m) => AttrMap -> m a -> m (Event t (), a)
+abutton ::
+     (PostBuild t m, Dom.DomBuilder t m) => AttrMap -> m a -> m (Event t (), a)
 abutton = abuttonDynAttr . constDyn
 
-abuttonDynAttr :: (PostBuild t m, Dom.DomBuilder t m) => Dynamic t AttrMap -> m a -> m (Event t (), a)
+abuttonDynAttr ::
+     (PostBuild t m, Dom.DomBuilder t m)
+  => Dynamic t AttrMap
+  -> m a
+  -> m (Event t (), a)
 abuttonDynAttr attrs monadF = do
   over (mapped . _1) (Dom.domEvent Dom.Click) $
     T.aDynAttr' (attrUnion buttonClassAttr <$> attrs) monadF

@@ -4,12 +4,12 @@
 
 -- | Icons with material design
 module Reflex.Bulmex.Tag.Icon
-  (-- * Icon
-    icon
+   -- * Icon
+  ( icon
   , iconClass
   , iconDyn
-  ,-- * Flask
-    flask
+   -- * Flask
+  , flask
   ) where
 
 import qualified Data.Map.Strict          as Map

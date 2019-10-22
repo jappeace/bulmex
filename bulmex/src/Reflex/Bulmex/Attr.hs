@@ -2,7 +2,6 @@
 
 -- | Deal with attribute maps, which revolves mostly around assigning
 --   a class so we get appropriate styling
-
 module Reflex.Bulmex.Attr
   ( AttrMap
   , attrUnion

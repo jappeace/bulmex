@@ -3,13 +3,11 @@
 {-# LANGUAGE RankNTypes          #-}
 {-# LANGUAGE ScopedTypeVariables #-}
 
-
 -- | Odd tag helpers, these have uncommen html attributes
 --   They don't fit in the 'normal' pattern of Abstract
 module Reflex.Bulmex.Tag.Odd
-  (
   -- * Image
-    image
+  ( image
   , imageClass
   -- * Link
   , ahref
@@ -36,14 +34,14 @@ import           Reflex.Dom.Core
 import qualified Reflex.Dom.Widget        as Dom
 import qualified Reflex.Tags              as T
 
-
 -- | kindoff hard to set an image tag in reflex
-image :: Dom.DomBuilder t m => Text.Text -> m()
+image :: Dom.DomBuilder t m => Text.Text -> m ()
 image url = T.imgAttr (Map.singleton "src" url) Dom.blank
 
 -- | first class second src
-imageClass :: Dom.DomBuilder t m => Text.Text -> Text.Text -> m()
-imageClass clazz url = T.imgAttr (Map.fromList [("src",url), ("class", clazz)]) Dom.blank
+imageClass :: Dom.DomBuilder t m => Text.Text -> Text.Text -> m ()
+imageClass clazz url =
+  T.imgAttr (Map.fromList [("src", url), ("class", clazz)]) Dom.blank
 
 -- | sometimes you just need 2 pieces of text to seperate with a space
 textSpace :: Dom.DomBuilder t m => m ()
@@ -53,11 +51,18 @@ textSpace = Dom.text space
 ahref :: (Dom.DomBuilder t m, PostBuild t m) => Text.Text -> m a -> m a
 ahref = ahref' mempty
 
-ahref' :: (Dom.DomBuilder t m, PostBuild t m) => AttrMap -> Text.Text -> m a -> m a
+ahref' ::
+     (Dom.DomBuilder t m, PostBuild t m) => AttrMap -> Text.Text -> m a -> m a
 ahref' uno = ahrefDyn (constDyn uno) . constDyn
 
-ahrefDyn :: (Dom.DomBuilder t m, PostBuild t m) => Dynamic t AttrMap -> Dynamic t Text.Text -> m a -> m a
-ahrefDyn uno txt = T.aDynAttr $ (attrUnion <$> uno) <*> (Map.singleton "href" <$> txt)
+ahrefDyn ::
+     (Dom.DomBuilder t m, PostBuild t m)
+  => Dynamic t AttrMap
+  -> Dynamic t Text.Text
+  -> m a
+  -> m a
+ahrefDyn uno txt =
+  T.aDynAttr $ (attrUnion <$> uno) <*> (Map.singleton "href" <$> txt)
 
 -- | From https://gist.github.com/3noch/134b1ee7fa48c347be9d164c3fac4ef7
 --   Like 'elDynAttr'' but configures "prevent default" on the given event.

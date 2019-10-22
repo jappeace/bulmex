@@ -7,8 +7,8 @@
 --   They also indicate to the child monad how an action is performing
 --   with spinstates.
 module Reflex.Bulmex.Form
-  ( -- * Spin
-    withSpinDyn
+    -- * Spin
+  ( withSpinDyn
   , spinWidget
   , aSpinButtonClass
   -- * Action form
@@ -64,7 +64,10 @@ spinState start stop =
 
 -- | This looks a lot like `withDebounceEvtReq`, maybe a better abstraction is possible?
 spinWidget ::
-     (Dom.DomBuilder t m, PerformEvent t m, TriggerEvent t m, (MonadIO (Performable m))
+     ( Dom.DomBuilder t m
+     , PerformEvent t m
+     , TriggerEvent t m
+     , (MonadIO (Performable m))
      , MonadHold t m
      , MonadFix m
      )
@@ -81,13 +84,17 @@ spinWidget widgetF eventHandlr = do
 
 loadAttr :: SpinState -> AttrMap
 loadAttr SpinRest = mempty
-loadAttr Spinning = Map.fromList
-  [("class", "is-loading"), ("disabled", "1")]
+loadAttr Spinning = Map.fromList [("class", "is-loading"), ("disabled", "1")]
 
-withSpinDyn :: -- XXX only used once? maybe remove
-     (Dom.DomBuilder t m, PerformEvent t m, TriggerEvent t m, (MonadIO (Performable m))
+withSpinDyn -- XXX only used once? maybe remove
+ ::
+     ( Dom.DomBuilder t m
+     , PerformEvent t m
+     , TriggerEvent t m
+     , (MonadIO (Performable m))
      , MonadHold t m
-     , MonadFix m)
+     , MonadFix m
+     )
   => AttrMap
   -> (Dynamic t AttrMap -> m (Event t ()))
   -> (Event t () -> m (Event t b))
@@ -95,8 +102,14 @@ withSpinDyn :: -- XXX only used once? maybe remove
 withSpinDyn atrributes f =
   spinWidget (f . fmap (attrUnion atrributes . loadAttr))
 
-aSpinButtonClass :: (Dom.DomBuilder t m, PostBuild t m) => Text.Text -> Dynamic t SpinState -> m () -> m (Event t ())
-aSpinButtonClass clazz spinstate = fmap fst .
+aSpinButtonClass ::
+     (Dom.DomBuilder t m, PostBuild t m)
+  => Text.Text
+  -> Dynamic t SpinState
+  -> m ()
+  -> m (Event t ())
+aSpinButtonClass clazz spinstate =
+  fmap fst .
   abuttonDynAttr (attrUnion (classAttr clazz) . loadAttr <$> spinstate)
 
 -- attrmap
@@ -104,8 +117,10 @@ aSpinButtonClass clazz spinstate = fmap fst .
 --   sends it to them
 form :: (Dom.DomBuilder t m, MonadFix m) => (Event t () -> m a) -> m a
 form monF = do
-  rec val <- T.formAttr'
+  rec val <-
+        T.formAttr'
           -- sometimes it reloads on enter, not always, this stops that
-          (Map.singleton "onsubmit" "return false;") $ monF enter
+          (Map.singleton "onsubmit" "return false;") $
+        monF enter
       let enter = Dom.keypress Dom.Enter (val ^. _1)
   pure $ val ^. _2

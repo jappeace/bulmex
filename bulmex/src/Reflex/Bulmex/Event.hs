@@ -43,7 +43,6 @@ holdEvent_ ::
      (Dom.DomBuilder t m, MonadHold t m) => Event t a -> (a -> m b) -> m ()
 holdEvent_ = fmap void . holdEvent undefined -- we throw away the value
 
-
 -- | Get rid of a dynimc around a tupple of events,
 --   common sense says we should be able to do this for any traversable,
 --   but keeping the values of events hetrogenous is hard (I don't know how to)
@@ -71,13 +70,25 @@ holdAfter val evt fun = delay 0 evt >>= holdEvent val evt . flip fun
 
 -- | show something for 5 seconds after an event
 flash ::
-     (Monoid c, Dom.DomBuilder t m, PerformEvent t m, MonadHold t m, TriggerEvent t m, (MonadIO (Performable m)))
+     ( Monoid c
+     , Dom.DomBuilder t m
+     , PerformEvent t m
+     , MonadHold t m
+     , TriggerEvent t m
+     , (MonadIO (Performable m))
+     )
   => Event t b
   -> (b -> m c)
   -> m (Dynamic t c)
 flash = flash' 5 mempty
 
-flash' :: (Dom.DomBuilder t m, PerformEvent t m, MonadHold t m, TriggerEvent t m, (MonadIO (Performable m)))
+flash' ::
+     ( Dom.DomBuilder t m
+     , PerformEvent t m
+     , MonadHold t m
+     , TriggerEvent t m
+     , (MonadIO (Performable m))
+     )
   => NominalDiffTime
   -> c
   -> Event t b
@@ -88,7 +99,10 @@ flash' time defVal event monadFunc = do
   holdEvent defVal (leftmost [pure <$> event, empty <$ delayed]) $
     maybe (pure defVal) monadFunc
 
-evtText :: (Dom.DomBuilder t m, PostBuild t m, MonadHold t m) => Event t Text.Text -> m ()
+evtText ::
+     (Dom.DomBuilder t m, PostBuild t m, MonadHold t m)
+  => Event t Text.Text
+  -> m ()
 evtText evt = Dom.dynText =<< holdDyn "" evt
 
 gatePrism :: Reflex t => Prism' a b -> Event t a -> Event t b

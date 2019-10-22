@@ -2,7 +2,8 @@
 
 -- | Sometimes you just need some space in your life
 module Reflex.Bulmex.Space
-  ( space, spaceJoin
+  ( space
+  , spaceJoin
   ) where
 
 import qualified Data.Text as Text

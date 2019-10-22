@@ -3,11 +3,11 @@
 {-# LANGUAGE RankNTypes        #-}
 
 -- | Tooltips with balloon css
-module Reflex.Bulmex.Tag.Tooltip(
-  tooltipText,
-  tooltipText',
-  ToolDirection(..),
-  tipToAttr
+module Reflex.Bulmex.Tag.Tooltip
+  ( tooltipText
+  , tooltipText'
+  , ToolDirection(..)
+  , tipToAttr
   ) where
 
 import qualified Data.Map.Strict          as Map

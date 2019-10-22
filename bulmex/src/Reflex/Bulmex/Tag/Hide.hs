@@ -14,11 +14,7 @@ import qualified Reflex.Dom.Builder.Class as Dom
 import qualified Reflex.Tags              as T
 
 switchDiv ::
-     (PostBuild t m, Dom.DomBuilder t m)
-  => Dynamic t Bool
-  -> m ()
-  -> m a
-  -> m a
+     (PostBuild t m, Dom.DomBuilder t m) => Dynamic t Bool -> m () -> m a -> m a
 switchDiv attrDyn true false = do
   hideDiv_ (not <$> attrDyn) true
   hideDiv_ attrDyn false

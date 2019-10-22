@@ -20,3 +20,6 @@ clean:
 
 ghcid:
 	nix-shell --run "ghcid -s \"import Main\" -c \"make update-cabal && cabal new-repl \" -T \"main\" test:unit"
+
+haddock:
+	cabal new-haddock all
