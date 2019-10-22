@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: c982e91a94bae0ecf5133d2690cdc9548e810b16709b093cbd30af782da48e63
+-- hash: ebb181e006222d6232fb8ff4fe4c0e80749ab5964ea12f0e633de61aa56dacc0
 
 name:           bulmex
 version:        2.0.0
@@ -31,8 +31,13 @@ library
   exposed-modules:
       Reflex.Bulmex.Attr
       Reflex.Bulmex.Event
+      Reflex.Bulmex.Form
+      Reflex.Bulmex.Form.FormTypes
       Reflex.Bulmex.Html
+      Reflex.Bulmex.Input.Basic
       Reflex.Bulmex.Input.Polymorphic
+      Reflex.Bulmex.Load
+      Reflex.Bulmex.Modal
       Reflex.Bulmex.Space
       Reflex.Bulmex.Tag
       Reflex.Bulmex.Tag.Abstract
@@ -51,8 +56,10 @@ library
     , base >=4.7 && <5
     , bytestring
     , containers
+    , generic-lens
     , jsaddle
     , jsaddle-dom
+    , keycode
     , lens
     , network-uri
     , reflex >=0.6.1 && <0.7
@@ -70,8 +77,13 @@ test-suite unit
       Test.TestSpec
       Reflex.Bulmex.Attr
       Reflex.Bulmex.Event
+      Reflex.Bulmex.Form
+      Reflex.Bulmex.Form.FormTypes
       Reflex.Bulmex.Html
+      Reflex.Bulmex.Input.Basic
       Reflex.Bulmex.Input.Polymorphic
+      Reflex.Bulmex.Load
+      Reflex.Bulmex.Modal
       Reflex.Bulmex.Space
       Reflex.Bulmex.Tag
       Reflex.Bulmex.Tag.Abstract
@@ -90,10 +102,12 @@ test-suite unit
     , base >=4.7 && <5
     , bytestring
     , containers
+    , generic-lens
     , hspec
     , hspec-core
     , jsaddle
     , jsaddle-dom
+    , keycode
     , lens
     , network-uri
     , reflex >=0.6.1 && <0.7

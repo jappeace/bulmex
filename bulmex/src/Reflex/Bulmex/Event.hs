@@ -6,8 +6,10 @@
 module Reflex.Bulmex.Event where
 
 import           Control.Applicative      (empty)
+import           Control.Lens
 import           Control.Monad            (void)
 import           Control.Monad.IO.Class   (MonadIO)
+import           Data.Bool
 import qualified Data.Text                as Text
 import           Data.Time.Clock          (NominalDiffTime)
 import           Data.Witherable
@@ -88,3 +90,9 @@ flash' time defVal event monadFunc = do
 
 evtText :: (Dom.DomBuilder t m, PostBuild t m, MonadHold t m) => Event t Text.Text -> m ()
 evtText evt = Dom.dynText =<< holdDyn "" evt
+
+gatePrism :: Reflex t => Prism' a b -> Event t a -> Event t b
+gatePrism pr = fmapMaybe (preview pr)
+
+blockFalse :: Reflex t => Event t Bool -> Event t ()
+blockFalse = fmapMaybe $ bool Nothing (Just ())
