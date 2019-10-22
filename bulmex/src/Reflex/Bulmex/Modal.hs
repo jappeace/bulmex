@@ -5,9 +5,9 @@
 --   Puts code behinds bulma's modal styling: https://bulma.io/documentation/components/modal/
 module Reflex.Bulmex.Modal
   ( modal
-  , OnClose
   , modal'
   , modalClose
+  , OnClose
   ) where
 
 import           Control.Lens
@@ -18,34 +18,36 @@ import qualified Reflex.Dom.Builder.Class as Dom
 import qualified Reflex.Dom.Widget.Basic  as Dom
 import qualified Reflex.Tags              as T
 
-data OnClose =
-  OnClose
 
 -- | A modal that opens on event and has a cross to close it.
+--   m a dictates what's inside the modal.
+--   You probably want to use a 'Reflex.Bulmex.Tag.Bulma.box'.
 modal ::
      (PostBuild t m, MonadHold t m, MonadFix m, Dom.DomBuilder t m)
-  => Event t ()
-  -> m a
+  => Event t () -- ^ open trigger
+  -> m a -- ^ modal body
   -> m (a, Event t OnClose)
 modal = modal' never
 
 -- | A modal that can be opened and closed with events.
---   Also has a cross to close it.
+--   It also has a cross to close with.
 modal' ::
      (PostBuild t m, MonadHold t m, MonadFix m, Dom.DomBuilder t m)
-  => Event t ()
-  -> Event t ()
-  -> m a
+  => Event t () -- ^ close trigger
+  -> Event t () -- ^ open trigger
+  -> m a -- ^ modal body
   -> m (a, Event t OnClose)
 modal' closeEvt openEvt monad =
   modalClose openEvt $ do
     res <- monad
     pure (res, closeEvt)
 
+-- | The most generic modal, It receives an open event.
+--   And the inner monad can indicate when to close with a closeEvent.
 modalClose ::
      (PostBuild t m, MonadHold t m, MonadFix m, Dom.DomBuilder t m)
-  => Event t ()
-  -> m (a, Event t ())
+  => Event t () -- ^ open trigger
+  -> m (a, Event t ()) -- ^ body + close trigger result
   -> m (a, Event t OnClose)
 modalClose openEvt monad = do
   rec stateDyn <-
@@ -68,3 +70,7 @@ modalClose openEvt monad = do
   where
     closed = classAttr "modal"
     opened = classAttr "modal is-active"
+
+-- | An incation that an event came from closing a modal
+data OnClose =
+  OnClose

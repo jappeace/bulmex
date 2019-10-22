@@ -2,8 +2,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE RecursiveDo       #-}
 
--- | Bulma loading screen with help of extension:
---   https://wikiki.github.io/elements/pageloader/
+-- | Load time manipulation
 module Reflex.Bulmex.Load
   ( pageLoader
   , prerenderLoad
@@ -24,6 +23,8 @@ import           Reflex.Dom.Prerender
 import qualified Reflex.Dom.Widget.Basic    as Dom
 import qualified Reflex.Tags                as T
 
+-- | Bulma loading screen with help of extension:
+--   https://wikiki.github.io/elements/pageloader/
 pageLoader :: DomBuilder t m => Text.Text -> m a -> m a
 pageLoader = partialDiv "pageloader"
 

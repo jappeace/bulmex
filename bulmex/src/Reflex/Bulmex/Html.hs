@@ -137,6 +137,7 @@ headWidget settings = do
     traversed .
     to (Text.pack . show)
 
+-- TODO Move to Load
 -- | Insert an encodable in the document body,
 --   in case of the server side rendering we encode it as script tag with jsonval,
 --   in case of ghcjsdom we read the value from that script tag

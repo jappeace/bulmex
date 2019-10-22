@@ -10,8 +10,8 @@ module Reflex.Bulmex.Form
   ( actionForm
   , form
   -- * Spin
-  , withSpinDyn
   , spinWidget
+  , withSpinDyn
   , aSpinButtonClass
   , loadAttr
   -- * Types
@@ -33,18 +33,27 @@ import qualified Reflex.Dom.Widget            as Dom
 import qualified Reflex.Tags                  as T
 import qualified Web.KeyCode                  as Dom
 
--- | The first argument is a function that expects data `a`,
---   and a trigger event, producing another event in a monadic context.
+-- | This function mimics an arbitrary html form in control flow.
+--   The first argument is the action function with arbitrary input a
+--   and a trigger event.
+--   This returns another event in a monadic context.
+--
+--   > action="(a -> Event t () -> m (Event t b))"
+--
 --   This perfectly aligns with servant-reflex.
 --   The produced event is given to the form, the second argument.
---   which also includes the 'SpinState', indicating if we're
---   exeecuting the event or not.
---   The form has to return 3 values, firstly `a` the information for the first function,
---   The is the event that controls the form, and the third is an optional return value.
+--   which is the form body:
+--
+--   > <form>(Event t b -> Dynamic t SpinState -> m (a, Event t FormAction, c))</form>
+--
+--   and also includes the 'SpinState',
+--   indicating if we're executing the action or not.
+--   The form has to return 3 values, the information for the action function,
+--   The 'FormAction' event that controls the form, and the third is a return value for the form.
 actionForm ::
      (Dom.DomBuilder t m, MonadHold t m, MonadFix m)
-  => (a -> Event t () -> m (Event t b))
-  -> (Event t b -> Dynamic t SpinState -> m (a, Event t FormAction, c))
+  => (a -> Event t () -> m (Event t b)) -- ^ Action function
+  -> (Event t b -> Dynamic t SpinState -> m (a, Event t FormAction, c)) -- ^ form body
   -> m c
 actionForm actF monM =
   form $ \onEnter -> do
@@ -80,8 +89,8 @@ spinWidget ::
      , MonadHold t m
      , MonadFix m
      )
-  => (Dynamic t SpinState -> m (Event t ()))
-  -> (Event t () -> m (Event t b))
+  => (Dynamic t SpinState -> m (Event t ())) -- ^ Widget body
+  -> (Event t () -> m (Event t b)) -- ^ Trigger function
   -> m (Event t b)
 spinWidget widgetF eventHandlr = do
   rec onClick <- widgetF dynamicClass

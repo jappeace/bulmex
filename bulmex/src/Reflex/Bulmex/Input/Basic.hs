@@ -5,13 +5,14 @@
 
 -- | Basic inputs with bulma styling
 module Reflex.Bulmex.Input.Basic
-  ( abuttonClass
+  ( abutton
+  , abuttonClass
   , abuttonLarge
-  , txtInput
-  , abutton
-  , buttonClassAttr
   , abuttonDynAttr
+  , buttonClassAttr
+  -- * Text inputs
   , txtArea
+  , txtInput
   ) where
 
 import           Control.Lens
@@ -56,6 +57,11 @@ abuttonClass ::
   -> m (Event t (), a)
 abuttonClass = abutton . classAttr
 
+-- | A button around an arbitrary dom element:
+--
+--   > <button> m a </button>
+--
+--   It's also styled nicely.
 abutton ::
      (PostBuild t m, Dom.DomBuilder t m) => AttrMap -> m a -> m (Event t (), a)
 abutton = abuttonDynAttr . constDyn

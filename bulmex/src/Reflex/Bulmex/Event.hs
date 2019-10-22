@@ -3,7 +3,24 @@
 {-# LANGUAGE RankNTypes        #-}
 
 -- | Helper functions for dealing with events
-module Reflex.Bulmex.Event where
+module Reflex.Bulmex.Event
+  ( eventJoin
+  , switchTup
+  -- * Hold
+  , holdEvent
+  , holdEvent_
+  , holdAfter
+  -- * Flash
+  , flash
+  , flash'
+  -- * Display
+  , evtText
+  -- * Gate
+  , noNothing
+  , gatePrism
+  , blockFalse
+  )
+  where
 
 import           Control.Applicative      (empty)
 import           Control.Lens
