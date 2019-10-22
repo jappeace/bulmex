@@ -32,6 +32,8 @@ prerenderLoad :: (Prerender js t m, DomBuilder t m) => m () -> m ()
 prerenderLoad spinner =
   void $ prerender (T.divClass "prerender-load" $ spinner) Dom.blank
 
+-- | Don't display something untill event occurs,
+--   combine with getready to delay loading of non-critical components
 postpone :: (DomBuilder t m, MonadHold t m) => Event t () -> m () -> m ()
 postpone evt m = holdEvent_ evt (const m)
 

@@ -31,7 +31,7 @@ _Loading = _Ctor @"Loading"
 _FormRest :: Prism' FormAction ()
 _FormRest = _Ctor @"FormRest"
 
-data SpinState
+data SpinState -- TODO rename to load state?
   = SpinRest
   | Spinning
   deriving (Show)
