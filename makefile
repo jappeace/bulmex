@@ -23,3 +23,6 @@ ghcid:
 
 haddock:
 	cabal new-haddock all
+
+haddock-hackage:
+	cabal new-haddock all --haddock-for-hackage --haddock-option=--hyperlinked-source
