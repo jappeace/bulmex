@@ -4,10 +4,10 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: ebb181e006222d6232fb8ff4fe4c0e80749ab5964ea12f0e633de61aa56dacc0
+-- hash: d67294831c6d62f3268fe8a5d7abc24d2271686c6842d096537e2fdda8d7a170
 
 name:           bulmex
-version:        2.0.0
+version:        2.1.0
 synopsis:       Reflex infused with bulma (css)
 description:    Reflex infused with bulma, With a bunch of helper functions for making server side rendering easier. See related [blogpost](https://jappieklooster.nl/reflex-server-side-html-rendering.html).
 category:       Web

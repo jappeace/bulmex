@@ -13,6 +13,7 @@ module Reflex.Bulmex.Form
   , withSpinDyn
   , spinWidget
   , aSpinButtonClass
+  , loadAttr
   -- * Types
   , module X
   ) where
