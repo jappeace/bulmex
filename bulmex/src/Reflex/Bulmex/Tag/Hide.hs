@@ -13,6 +13,7 @@ import           Reflex.Bulmex.Attr
 import qualified Reflex.Dom.Builder.Class as Dom
 import qualified Reflex.Tags              as T
 
+-- | When the dynamic is true the first monad is shown, otherwise the second.
 switchDiv ::
      (PostBuild t m, Dom.DomBuilder t m) => Dynamic t Bool -> m () -> m a -> m a
 switchDiv attrDyn true false = do
