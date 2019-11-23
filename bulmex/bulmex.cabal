@@ -4,10 +4,10 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: d67294831c6d62f3268fe8a5d7abc24d2271686c6842d096537e2fdda8d7a170
+-- hash: 473c75053e3d524241fe35cabd197b6f23f9bdda6769366f7deb5ddbb8a22434
 
 name:           bulmex
-version:        2.1.0
+version:        3.0.0
 synopsis:       Reflex infused with bulma (css)
 description:    Reflex infused with bulma, With a bunch of helper functions for making server side rendering easier. See related [blogpost](https://jappieklooster.nl/reflex-server-side-html-rendering.html).
 category:       Web
@@ -35,6 +35,7 @@ library
       Reflex.Bulmex.Form.FormTypes
       Reflex.Bulmex.Html
       Reflex.Bulmex.Input.Basic
+      Reflex.Bulmex.Input.Debounce
       Reflex.Bulmex.Input.Polymorphic
       Reflex.Bulmex.Load
       Reflex.Bulmex.Modal
@@ -81,6 +82,7 @@ test-suite unit
       Reflex.Bulmex.Form.FormTypes
       Reflex.Bulmex.Html
       Reflex.Bulmex.Input.Basic
+      Reflex.Bulmex.Input.Debounce
       Reflex.Bulmex.Input.Polymorphic
       Reflex.Bulmex.Load
       Reflex.Bulmex.Modal

@@ -44,16 +44,16 @@ import qualified Web.KeyCode                  as Dom
 --   The produced event is given to the form, the second argument.
 --   which is the form body:
 --
---   > <form>(Event t b -> Dynamic t SpinState -> m (a, Event t FormAction, c))</form>
+--   > <form>(Event t b -> Dynamic t FormState -> m (a, Event t FormAction, c))</form>
 --
---   and also includes the 'SpinState',
+--   and also includes the 'FormState',
 --   indicating if we're executing the action or not.
 --   The form has to return 3 values, the information for the action function,
 --   The 'FormAction' event that controls the form, and the third is a return value for the form.
 actionForm ::
      (Dom.DomBuilder t m, MonadHold t m, MonadFix m)
   => (a -> Event t () -> m (Event t b)) -- ^ Action function
-  -> (Event t b -> Dynamic t SpinState -> m (a, Event t FormAction, c)) -- ^ form body
+  -> (Event t b -> Dynamic t FormState -> m (a, Event t FormAction, c)) -- ^ form body
   -> m c
 actionForm actF monM =
   form $ \onEnter -> do
@@ -73,14 +73,14 @@ spinState ::
      (Reflex t, MonadHold t m, MonadFix m)
   => Event t ()
   -> Event t ()
-  -> m (Dynamic t SpinState)
+  -> m (Dynamic t FormState)
 spinState start stop =
-  accumDyn (const id) SpinRest $ leftmost [Spinning <$ start, SpinRest <$ stop]
+  accumDyn (const id) FormStateRest $ leftmost [FormStateSpinning <$ start, FormStateRest <$ stop]
 
 -- This looks a lot like `withDebounceEvtReq`, maybe a better abstraction is possible?
 -- | A more general use of the spinstate.
 --   The first argument is the widget that can indicate when to execute
---   the second function. It will be made aware of the 'SpinState'.
+--   the second function. It will be made aware of the 'FormState'.
 spinWidget ::
      ( Dom.DomBuilder t m
      , PerformEvent t m
@@ -89,7 +89,7 @@ spinWidget ::
      , MonadHold t m
      , MonadFix m
      )
-  => (Dynamic t SpinState -> m (Event t ())) -- ^ Widget body
+  => (Dynamic t FormState -> m (Event t ())) -- ^ Widget body
   -> (Event t () -> m (Event t b)) -- ^ Trigger function
   -> m (Event t b)
 spinWidget widgetF eventHandlr = do
@@ -100,9 +100,9 @@ spinWidget widgetF eventHandlr = do
       dynamicClass <- spinState onClick $ setClassOnReq <> setClassafterReq
   pure onRequest
 
-loadAttr :: SpinState -> AttrMap
-loadAttr SpinRest = mempty
-loadAttr Spinning = Map.fromList [("class", "is-loading"), ("disabled", "1")]
+loadAttr :: FormState -> AttrMap
+loadAttr FormStateRest = mempty
+loadAttr FormStateSpinning = Map.fromList [("class", "is-loading"), ("disabled", "1")]
 
 withSpinDyn -- XXX only used once? maybe remove
  ::
@@ -123,7 +123,7 @@ withSpinDyn atrributes f =
 aSpinButtonClass ::
      (Dom.DomBuilder t m, PostBuild t m)
   => Text.Text
-  -> Dynamic t SpinState
+  -> Dynamic t FormState
   -> m ()
   -> m (Event t ())
 aSpinButtonClass clazz spinstate =

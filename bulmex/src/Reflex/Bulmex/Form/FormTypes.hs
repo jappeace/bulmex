@@ -5,7 +5,7 @@
 -- | Types for Form.
 module Reflex.Bulmex.Form.FormTypes
   ( FormAction(..)
-  , SpinState(..)
+  , FormState(..)
   -- * Prisms
   , _PostDefault
   , _Loading
@@ -31,14 +31,14 @@ _Loading = _Ctor @"Loading"
 _FormRest :: Prism' FormAction ()
 _FormRest = _Ctor @"FormRest"
 
-data SpinState -- TODO rename to load state?
-  = SpinRest
-  | Spinning
+data FormState
+  = FormStateRest
+  | FormStateSpinning
   deriving (Show)
 
-instance Semigroup SpinState where
-  (<>) SpinRest SpinRest = SpinRest
-  (<>) _ _               = Spinning
+instance Semigroup FormState where
+  (<>) FormStateRest FormStateRest = FormStateRest
+  (<>) _ _                         = FormStateSpinning
 
-instance Monoid SpinState where
-  mempty = SpinRest
+instance Monoid FormState where
+  mempty = FormStateRest
