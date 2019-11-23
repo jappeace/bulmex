@@ -4,12 +4,12 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 473c75053e3d524241fe35cabd197b6f23f9bdda6769366f7deb5ddbb8a22434
+-- hash: 437fddec128f807a107380e8703fad0e32c13b707a2252431b9ac45157b6de50
 
 name:           bulmex
 version:        3.0.0
 synopsis:       Reflex infused with bulma (css)
-description:    Reflex infused with bulma, With a bunch of helper functions for making server side rendering easier. See related [blogpost](https://jappieklooster.nl/reflex-server-side-html-rendering.html).
+description:    Reflex infused with bulma, [Implements](https://hackage.haskell.org/package/bulmex/docs/Reflex-Bulmex-Modal.html) the [modal](https://bulma.io/documentation/components/modal/) for example. Also has helper functions for common tasks. such as making server side rendering easier. See related [blogpost](https://jappieklooster.nl/reflex-server-side-html-rendering.html).
 category:       Web
 homepage:       https://github.com/jappeace/bulmex#readme
 bug-reports:    https://github.com/jappeace/bulmex/issues

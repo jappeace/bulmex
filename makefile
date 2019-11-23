@@ -31,3 +31,6 @@ haddock-hackage:
 	echo "the hackage ui doesn't accept the default format, use command instead"
 	cabal upload -d --publish ./dist-newstyle/*-docs.tar.gz
 
+
+sdist: update-cabal haddock
+	cabal new-sdist all

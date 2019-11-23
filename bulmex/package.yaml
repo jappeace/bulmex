@@ -13,7 +13,9 @@ extra-source-files:
 - ChangeLog.md
 
 description: Reflex infused with bulma,
-            With a bunch of helper functions for making server side rendering easier.
+            [Implements](https://hackage.haskell.org/package/bulmex/docs/Reflex-Bulmex-Modal.html) the [modal](https://bulma.io/documentation/components/modal/) for example.
+            Also has helper functions for common tasks.
+            such as making server side rendering easier.
             See related [blogpost](https://jappieklooster.nl/reflex-server-side-html-rendering.html).
 
 ghc-options: -Wall -Wcompat -Wincomplete-uni-patterns -Widentities
