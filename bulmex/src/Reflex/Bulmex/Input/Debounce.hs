@@ -6,10 +6,10 @@
 -- | This makes it easy to create auto-save operations
 --   not limited to saves.
 module Reflex.Bulmex.Input.Debounce
-  ( InputStates(..)
-  , defStateAttr
-  , withInputDebounceEvt
+  ( withInputDebounceEvt
   , withInput
+  , InputStates(..)
+  , defStateAttr
   )
 where
 
