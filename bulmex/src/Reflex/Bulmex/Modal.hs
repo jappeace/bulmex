@@ -1,8 +1,8 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE RecursiveDo       #-}
 
--- | A modal dialogue, eg pop up, for example to confirm an action.
---   Puts code behinds bulma's modal styling: https://bulma.io/documentation/components/modal/
+-- | A modal dialogue, for example to confirm an action.
+--   Makes bulma's <https://bulma.io/documentation/components/modal/ modal> styling work
 module Reflex.Bulmex.Modal
   ( modal
   , modal'
