@@ -12,11 +12,15 @@ extra-source-files:
 - README.md
 - ChangeLog.md
 
-description: Reflex infused with bulma,
-            [Implements](https://hackage.haskell.org/package/bulmex/docs/Reflex-Bulmex-Modal.html) the [modal](https://bulma.io/documentation/components/modal/) for example.
-            Also has helper functions for common tasks.
+description: Bulma is a pure CSS framework. Because of that it can be easily used with reflex.
+            This library realizes that combination.
+            Bulma already provided styling for a [modal](https://bulma.io/documentation/components/modal/),
+            we just [implemented](https://hackage.haskell.org/package/bulmex/docs/Reflex-Bulmex-Modal.html) 
+            it for you!
+            There are also some helper functions for common tasks.
             such as making server side rendering easier.
-            See related [blogpost](https://jappieklooster.nl/reflex-server-side-html-rendering.html).
+            Which is described in a related
+            [blogpost](https://jappieklooster.nl/reflex-server-side-html-rendering.html).
 
 ghc-options: -Wall -Wcompat -Wincomplete-uni-patterns -Widentities
 

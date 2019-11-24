@@ -1,17 +1,20 @@
-# Bulmex, reflex infused with bulma
-Reflex infused with bulma, [Implements](https://hackage.haskell.org/package/bulmex/docs/Reflex-Bulmex-Modal.html) the [modal](https://bulma.io/documentation/components/modal/) for example.
-Also has helper functions for common tasks.
+> Fantastic fashion for free!
+
+Bulma is a pure CSS framework. Because of that it can be easily used with reflex.
+This library realizes that combination.
+Bulma already provided styling for a [modal](https://bulma.io/documentation/components/modal/),
+we just [implemented](https://hackage.haskell.org/package/bulmex/docs/Reflex-Bulmex-Modal.html) 
+it for you!
+There are also some helper functions for common tasks.
 such as making server side rendering easier.
-See related [blogpost](https://jappieklooster.nl/reflex-server-side-html-rendering.html).
+Which is described in a related
+[blogpost](https://jappieklooster.nl/reflex-server-side-html-rendering.html).
 
-## Links
-### Reflex
-
+## Reflex
 - core: https://hackage.haskell.org/package/reflex
 - DOM: https://hackage.haskell.org/package/reflex-dom-core
 
-### CSS
-
+## CSS
 - Bulma: https://bulma.io/
 - Baloon: https://kazzkiq.github.io/balloon.css/
 
@@ -19,7 +22,6 @@ See related [blogpost](https://jappieklooster.nl/reflex-server-side-html-renderi
 MIT
 
 # Support
-
 If you need help please [contact me](http://penguin.engineer/).
 This project is extended by and used in:
 
