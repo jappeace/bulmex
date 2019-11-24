@@ -42,12 +42,12 @@ withInputDebounceEvt
      , PerformEvent t m
      )
   => NominalDiffTime -- ^ Delay before posting the request
-  -> (result -> Bool) -- ^ Was the final requess successfull?
-  -> (Dynamic t InputStates -> m (b, Event t inputEvt)) -- ^ Widget body reacting to states
+  -> (result -> Bool) -- ^ Was the final requess successfull? For example: (isJust . reqSuccess)
   -> (b -> Event t inputEvt -> m (Event t result)) -- ^ Action function
+  -> (Dynamic t InputStates -> m (b, Event t inputEvt)) -- ^ Widget body reacting to states
   -> m (Event t result, b)
-withInputDebounceEvt debtime succF stateF =
-  withInput (debounce debtime) succF
+withInputDebounceEvt debtime succF actF stateF =
+  withInput (debounce debtime) succF actF
     $ const
     $ fmap (\(one', two) -> (one', two, one'))
     . stateF
@@ -66,14 +66,14 @@ defStateAttr InputInitial   = ""
 withInput
   :: (PostBuild t m, MonadFix m, MonadHold t m)
   => (Event t inputEvt -> m (Event t inputEvt)) -- ^ change input timeline, eg pure for no change
-  -> (result -> Bool) -- ^ Was the final requess successfull?
-  -> (  Event t result
+  -> (actionResult -> Bool) -- ^ Was the final requess successfull?
+  -> (actArgs -> Event t inputEvt -> m (Event t actionResult)) -- ^ Action function
+  -> (  Event t actionResult
      -> Dynamic t InputStates
-     -> m (actArgs, Event t inputEvt, finalRes)
+     -> m (actArgs, Event t inputEvt, innerWidgetResult)
      ) -- ^ Widget body reacting to states
-  -> (actArgs -> Event t inputEvt -> m (Event t result)) -- ^ Action function
-  -> m (Event t result, finalRes)
-withInput timeF isSuccessF createTypeEvt reqFunc = mdo
+  -> m (Event t actionResult, innerWidgetResult)
+withInput timeF isSuccessF reqFunc createTypeEvt = mdo
   (someData, typeEvtImmediate, result) <- createTypeEvt postFinished areaState
   typeEvtDeb                           <- timeF typeEvtImmediate
   postFinished                         <- reqFunc someData typeEvtDeb
