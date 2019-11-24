@@ -3,7 +3,7 @@
 {-# LANGUAGE RecursiveDo       #-}
 {-# LANGUAGE TypeFamilies      #-}
 
--- | This makes it easy to create auto-save operations
+-- | This makes it easy to create auto-save operations,
 --   not limited to saves.
 module Reflex.Bulmex.Input.Debounce
   ( withInputDebounceEvt
