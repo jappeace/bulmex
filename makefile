@@ -5,7 +5,10 @@ build: update-cabal
 file-watch:
 	scripts/watch.sh
 
-update-cabal:
+update-readme:
+	cp -f ./README.md bulmex/README.md
+
+update-cabal: update-readme
 	hpack ./bulmex
 
 EXTRA=""
