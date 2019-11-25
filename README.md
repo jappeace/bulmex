@@ -1,4 +1,6 @@
-![Build status](https://img.shields.io/travis/jappeace/bulmex?style=for-the-badge)
+[![Jappiejappie](https://img.shields.io/badge/blog-jappieklooster.nl-lightgrey?style=for-the-badge)](https://jappieklooster.nl)
+[![Build status](https://img.shields.io/travis/jappeace/bulmex?style=for-the-badge)](https://travis-ci.org/jappeace/bulmex/builds/)
+[![Jappiejappie](https://img.shields.io/badge/discord-jappiejappie-black?logo=discord&style=for-the-badge)](https://discord.gg/Hp4agqy)
 
 > Fantastic fashion for free!
 
