@@ -9,7 +9,7 @@ update-readme:
 	cp -f ./README.md bulmex/README.md
 
 update-cabal: update-readme
-	hpack ./bulmex
+	hpack -f ./bulmex
 
 EXTRA=""
 enter:

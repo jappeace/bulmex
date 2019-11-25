@@ -1,11 +1,10 @@
-cabal-version: 1.12
-
--- This file has been generated from package.yaml by hpack version 0.31.2.
+-- This file has been generated from package.yaml by hpack version 0.28.2.
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 9bae89e976ebf2d21d027cd2d806bf1f12684c807260ce6bc70716460966a8a3
+-- hash: 626fdc5e8544e39fe66a6418e5088650243c758e3365b7abaa80075cc50099bc
 
+cabal-version:  >= 1.10
 name:           bulmex
 version:        4.0.0
 synopsis:       Reflex infused with bulma (css)
@@ -20,8 +19,8 @@ license:        MIT
 license-file:   LICENSE
 build-type:     Simple
 extra-source-files:
-    README.md
     ChangeLog.md
+    README.md
 
 source-repository head
   type: git

@@ -2,8 +2,8 @@
 language: nix
 script:
   - cat /etc/nix/nix.conf # had some issues with this, kindoff important so always cat this is good
-  - nix-build -A ghc.backend
-  - nix-build -A ghcjs.frontend
+  - nix-build -A ghc.bulmex
+  - nix-build -A ghcjs.bulmex
   - echo "Wait 4 cachix"
   - sleep 10 # wait for cachix
   - echo "Done, eat pi"
