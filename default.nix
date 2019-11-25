@@ -1,9 +1,4 @@
-let reflex-platform = builtins.fetchGit {
-      url = https://github.com/reflex-frp/reflex-platform.git;
-      ref = "develop";
-      rev = "d1ec7642e83ee48de3fd7cd5a3889d6a9585206f";
-    };
-in (import reflex-platform { }).project ({ pkgs, ... }: {
+((import ./reflex) { }).project ({ pkgs, ... }: {
     withHoogle = false;
     packages = {
         bulmex = ./bulmex;

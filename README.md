@@ -1,5 +1,7 @@
 > Fantastic fashion for free!
 
+![Build status](https://img.shields.io/travis/jappeace/bulmex?style=for-the-badge)
+
 Bulma is a pure CSS framework. Because of that it can be easily used with reflex.
 This library realizes that combination.
 Bulma already provided styling for a [modal](https://bulma.io/documentation/components/modal/),

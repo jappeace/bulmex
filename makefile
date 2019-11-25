@@ -2,7 +2,7 @@ OPTIMIZATION=-O0
 build: update-cabal
 	cabal new-build all -j --ghc-options $(OPTIMIZATION)
 
-file-watch:
+file-watch: hpack
 	scripts/watch.sh
 
 update-readme:
@@ -33,7 +33,11 @@ haddock-hackage:
 	cabal new-haddock all --haddock-for-hackage --haddock-option=--hyperlinked-source
 	echo "the hackage ui doesn't accept the default format, use command instead"
 	cabal upload -d --publish ./dist-newstyle/*-docs.tar.gz
+etags:
+	nix-shell --run "hasktags  -e ./common/ ./frontend ./backend"
 
+hpack:
+	nix-shell ./hpack-shell.nix --run "make update-cabal"
 
 sdist: update-cabal haddock
 	cabal new-sdist all
