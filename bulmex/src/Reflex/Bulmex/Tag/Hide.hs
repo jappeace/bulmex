@@ -1,5 +1,5 @@
 {-# LANGUAGE GADTs             #-}
-{-# LANGUAGE OverloadedStrings #-}
+
 {-# LANGUAGE RankNTypes        #-}
 
 -- | A div that can hide with bulma is-hidden class

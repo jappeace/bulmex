@@ -3,7 +3,7 @@
 {-# LANGUAGE DeriveGeneric     #-}
 {-# LANGUAGE GADTs             #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TypeApplications  #-}
+
 
 -- | A root for an app,
 --   usefull for server side html rendering.
@@ -28,8 +28,9 @@ module Reflex.Bulmex.Html
 where
 
 import           Control.Lens
-import           Control.Monad                  ( void )
-import           Control.Monad                  ( join )
+import           Control.Monad                  ( join
+                                                , void
+                                                )
 import           Data.Aeson
 import           Data.Aeson.Text
 import qualified Data.ByteString.Lazy          as LBS
@@ -62,9 +63,8 @@ import qualified Reflex.Dom.Widget             as Dom
 -- >  </html>
 htmlWidget :: (Dom.DomBuilder t m) => HeadSettings -> m a -> m a
 htmlWidget settings content = Dom.el "html" $ do
-  void $ Dom.el "head" $ do
-    headWidget settings
-  Dom.el "body" $ content
+  void $ Dom.el "head" $ headWidget settings
+  Dom.el "body" content
 
 defSettings :: HeadSettings
 defSettings =
@@ -104,7 +104,7 @@ isasync = ("async", "true")
 
 scriptToMap :: HeadScript -> Map.Map Text.Text Text.Text
 scriptToMap script = Map.fromList
-  $ if (script ^. script_is_async) then [isasync, src] else [src]
+  $ if script ^. script_is_async then [isasync, src] else [src]
   where src = ("src", script ^. script_uri . to (Text.pack . show))
 
 -- | Try to keep the head as small as possible.
@@ -160,6 +160,6 @@ writeReadDom comelid serverState =
         mayDoc   <- currentDocument
         mayEl'   <- sequence $ (getElementById <$> mayDoc) <*> pure comelid
         mayInner <- sequence $ getInnerHTML <$> join mayEl'
-        let result = (join $ decode . LBS.fromStrict . encodeUtf8 <$> mayInner)
+        let result = join $ decode . LBS.fromStrict . encodeUtf8 <$> mayInner
         pure $ fromMaybe serverState -- TODO don't fail silently
                          result

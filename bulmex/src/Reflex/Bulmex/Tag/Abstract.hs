@@ -1,5 +1,5 @@
 {-# LANGUAGE GADTs             #-}
-{-# LANGUAGE OverloadedStrings #-}
+
 {-# LANGUAGE RankNTypes        #-}
 
 -- | Abstract tags, most tags have very similiar overload mechanisms

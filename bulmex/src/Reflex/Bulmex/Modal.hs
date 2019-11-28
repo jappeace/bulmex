@@ -54,16 +54,15 @@ modalClose openEvt monad = do
         closed
         (leftmost [opened <$ openEvt, closed <$ result ^. _2])
       result <- T.divDynAttr stateDyn $ do
-        (backgroundEl, _) <-
-          T.divAttr' (classAttr "modal-background") $ Dom.blank
-        monadResult   <- T.divClass "modal-content" $ monad
-        (buttonEl, _) <- T.aAttr' (classAttr "modal-close is-large") $ Dom.blank
+        (backgroundEl, _) <- T.divAttr' (classAttr "modal-background") Dom.blank
+        monadResult <- T.divClass "modal-content" monad
+        (buttonEl, _) <- T.aAttr' (classAttr "modal-close is-large") Dom.blank
         let closeClick = leftmost
               [ Dom.domEvent Dom.Click backgroundEl
               , Dom.domEvent Dom.Click buttonEl
               , monadResult ^. _2
               ]
-        pure $ (monadResult ^. _1, difference closeClick openEvt)
+        pure (monadResult ^. _1, difference closeClick openEvt)
   pure $ over _2 ((<$) OnClose) result
  where
   closed = classAttr "modal"

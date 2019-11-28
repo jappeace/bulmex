@@ -1,5 +1,5 @@
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecursiveDo       #-}
+
 {-# LANGUAGE TypeFamilies      #-}
 
 -- | This is just a copy of the upstream code except polymorphic:
@@ -96,15 +96,14 @@ instance Inp.HasValue (TextArea t) where
   value = _textArea_value
 
 textArea_keypress :: Lens' (TextArea t) (Event t Word)
-textArea_keypress f (TextArea x1 x2 x3 x4) =
-  (\y -> TextArea x1 x2 x3 y) <$> f x4
+textArea_keypress f (TextArea x1 x2 x3 x4) = (TextArea x1 x2 x3) <$> f x4
 
 textArea_value :: Lens' (TextArea t) (Dynamic t Text.Text)
 textArea_value f (TextArea x1 x2 x3 x4) = (\y -> TextArea y x2 x3 x4) <$> f x1
 
 textInput_hasFocus :: Lens' (TextInput t) (Dynamic t Bool)
 textInput_hasFocus f (TextInput x1 x2 x3 x4 x5 x6) =
-  (\y -> TextInput x1 x2 x3 x4 x5 y) <$> f x6
+  (TextInput x1 x2 x3 x4 x5) <$> f x6
 
 textInput_input :: Lens' (TextInput t) (Event t Text.Text)
 textInput_input f (TextInput x1 x2 x3 x4 x5 x6) =

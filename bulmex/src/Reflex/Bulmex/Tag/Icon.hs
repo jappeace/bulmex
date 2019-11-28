@@ -37,9 +37,9 @@ iconDyn
   -> m ()
 iconDyn wrapClass mdiClass = do
   textSpace
-  T.spanDynAttr (attrUnion (classAttr "icon") <$> wrapClass)
-    $ T.iDynAttr (Map.unionWith (<>) (classAttr "mdi mdi-") <$> mdiClass)
-    $ Dom.blank
+  T.spanDynAttr (attrUnion (classAttr "icon") <$> wrapClass) $ T.iDynAttr
+    (Map.unionWith (<>) (classAttr "mdi mdi-") <$> mdiClass)
+    Dom.blank
   textSpace
 
 flask :: (PostBuild t m, Dom.DomBuilder t m) => m ()

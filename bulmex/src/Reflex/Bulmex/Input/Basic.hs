@@ -1,6 +1,6 @@
 {-# LANGUAGE FlexibleContexts  #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecursiveDo       #-}
+
 {-# LANGUAGE TypeFamilies      #-}
 
 -- | Basic inputs with bulma styling
@@ -29,11 +29,8 @@ txtArea
   :: (Dom.DomBuilder t m, PostBuild t m)
   => Dom.TextAreaConfig t
   -> m (TextArea t)
-txtArea conf =
-  textArea
-    $  conf
-    &  Dom.textAreaConfig_attributes
-    %~ ((<*>) $ constDyn $ attrUnion $ classAttr "textarea")
+txtArea conf = textArea $ conf & Dom.textAreaConfig_attributes %~ (<*>)
+  (constDyn $ attrUnion $ classAttr "textarea")
 
 -- | Unlabeled text input with input class applied
 txtInput
@@ -72,6 +69,6 @@ abuttonDynAttr
   => Dynamic t AttrMap
   -> m a
   -> m (Event t (), a)
-abuttonDynAttr attrs monadF = do
+abuttonDynAttr attrs monadF =
   over (mapped . _1) (Dom.domEvent Dom.Click)
     $ T.aDynAttr' (attrUnion buttonClassAttr <$> attrs) monadF

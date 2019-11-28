@@ -37,8 +37,7 @@ tooltipText'
   -> Dynamic t Text.Text
   -> m a
   -> m a
-tooltipText' dir tipDyn monad =
-  T.spanDynAttr (tipToAttr dir <$> tipDyn) $ monad
+tooltipText' dir tipDyn monad = T.spanDynAttr (tipToAttr dir <$> tipDyn) monad
 
 tipToAttr :: ToolDirection -> Text.Text -> AttrMap
 tipToAttr dir "" = tipToAttr dir "-"
