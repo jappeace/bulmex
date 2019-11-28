@@ -14,8 +14,8 @@ module Reflex.Bulmex.Input.Debounce
 where
 
 import           Control.Monad.Fix
-import           Control.Monad.IO.Class (MonadIO)
-import qualified Data.Text              as Text
+import           Control.Monad.IO.Class         ( MonadIO )
+import qualified Data.Text                     as Text
 import           Data.Time
 import           Reflex
 import           Reflex.Bulmex.Event

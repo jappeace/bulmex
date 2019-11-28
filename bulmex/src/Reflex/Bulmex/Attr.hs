@@ -13,11 +13,12 @@ module Reflex.Bulmex.Attr
   , isHidden
   , switchAttr
   , colspan
-  ) where
+  )
+where
 
 import           Data.Bool
-import qualified Data.Map.Strict     as Map
-import qualified Data.Text           as Text
+import qualified Data.Map.Strict               as Map
+import qualified Data.Text                     as Text
 import           Reflex
 import           Reflex.Bulmex.Space
 

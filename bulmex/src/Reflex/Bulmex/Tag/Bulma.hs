@@ -40,14 +40,15 @@ module Reflex.Bulmex.Tag.Bulma
   , subtitleClass
   -- * Box
   , box
-  ) where
+  )
+where
 
-import qualified Data.Text                  as Text
+import qualified Data.Text                     as Text
 import           Reflex
 import           Reflex.Bulmex.Attr
 import           Reflex.Bulmex.Tag.Abstract
-import qualified Reflex.Dom.Builder.Class   as Dom
-import qualified Reflex.Tags                as T
+import qualified Reflex.Dom.Builder.Class      as Dom
+import qualified Reflex.Tags                   as T
 
 -- | Container: https://bulma.io/documentation/layout/container/
 container :: Dom.DomBuilder t m => m a -> m a
@@ -78,8 +79,8 @@ sect = T.divClass "section"
 section :: (PostBuild t m, Dom.DomBuilder t m) => m a -> m a
 section = sectionDyn $ constDyn mempty
 
-sectionDyn ::
-     (PostBuild t m, Dom.DomBuilder t m) => Dynamic t AttrMap -> m a -> m a
+sectionDyn
+  :: (PostBuild t m, Dom.DomBuilder t m) => Dynamic t AttrMap -> m a -> m a
 sectionDyn =
   dynAttrEl (\a b -> T.divDynAttr a $ container b) $ classAttr "section"
 
@@ -102,8 +103,8 @@ control = controlClass mempty
 controlClass :: Dom.DomBuilder t m => Text.Text -> m a -> m a
 controlClass = partialDiv "control"
 
-controlDyn ::
-     (PostBuild t m, Dom.DomBuilder t m) => Dynamic t AttrMap -> m a -> m a
+controlDyn
+  :: (PostBuild t m, Dom.DomBuilder t m) => Dynamic t AttrMap -> m a -> m a
 controlDyn = dynAttrEl T.divDynAttr $ classAttr "control"
 
 -- | https://bulma.io/documentation/layout/tiles/
