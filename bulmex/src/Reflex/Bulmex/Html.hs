@@ -160,6 +160,6 @@ writeReadDom comelid serverState =
         mayDoc   <- currentDocument
         mayEl'   <- sequence $ (getElementById <$> mayDoc) <*> pure comelid
         mayInner <- sequence $ getInnerHTML <$> join mayEl'
-        let result = join $ decode . LBS.fromStrict . encodeUtf8 <$> mayInner
+        let result = decode . LBS.fromStrict . encodeUtf8 =<< mayInner
         pure $ fromMaybe serverState -- TODO don't fail silently
                          result

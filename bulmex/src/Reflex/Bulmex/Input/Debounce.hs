@@ -80,7 +80,7 @@ withInput timeF isSuccessF reqFunc createTypeEvt = mdo
   areaState                            <- holdDyn InputInitial $ leftmost
     [ InputStarted <$ typeEvtImmediate
     , InputBuffered <$ typeEvtDeb
-    , InputProcessed <$ (blockFalse $ isSuccessF <$> postFinished)
-    , InputAborted <$ (blockFalse $ not . isSuccessF <$> postFinished)
+    , InputProcessed <$ blockFalse (isSuccessF <$> postFinished)
+    , InputAborted <$ blockFalse (not . isSuccessF <$> postFinished)
     ]
   pure (postFinished, result)

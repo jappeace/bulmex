@@ -1,17 +1,17 @@
-{-# LANGUAGE GADTs             #-}
+{-# LANGUAGE GADTs      #-}
 
-{-# LANGUAGE RankNTypes        #-}
+{-# LANGUAGE RankNTypes #-}
 
 -- | A div that can hide with bulma is-hidden class
 module Reflex.Bulmex.Tag.Hide where
 
 import           Control.Applicative
 import           Data.Bool
-import qualified Data.Map.Strict               as Map
+import qualified Data.Map.Strict          as Map
 import           Reflex
 import           Reflex.Bulmex.Attr
-import qualified Reflex.Dom.Builder.Class      as Dom
-import qualified Reflex.Tags                   as T
+import qualified Reflex.Dom.Builder.Class as Dom
+import qualified Reflex.Tags              as T
 
 -- | When the dynamic is true the first monad is shown, otherwise the second.
 switchDiv
@@ -46,4 +46,4 @@ hideEmptyDyn
   -> Dynamic t (f b)
   -> m a
   -> m a
-hideEmptyDyn dyn = hideDiv dyn . fmap ((==) empty)
+hideEmptyDyn dyn = hideDiv dyn . fmap (empty ==)
