@@ -21,12 +21,12 @@ module Reflex.Bulmex.Input.Polymorphic
 where
 
 import           Control.Lens
-import qualified Data.Map.Strict          as Map
-import qualified Data.Text                as Text
+import qualified Data.Map.Strict               as Map
+import qualified Data.Text                     as Text
 import           Reflex
 import           Reflex.Dom.Builder.Class
 import           Reflex.Dom.Widget.Basic
-import qualified Reflex.Dom.Widget.Input  as Inp
+import qualified Reflex.Dom.Widget.Input       as Inp
 
 textInput
   :: (DomBuilder t m, PostBuild t m) => Inp.TextInputConfig t -> m (TextInput t)
