@@ -135,7 +135,7 @@ aSpinButtonClass clazz spinstate = fmap fst
 form :: (Dom.DomBuilder t m, MonadFix m) => (Event t () -> m a) -> m a
 form monF = do
   rec val <- T.formAttr'
-                                      -- sometimes it reloads on enter, not always, this stops that
+                                          -- sometimes it reloads on enter, not always, this stops that
                          (Map.singleton "onsubmit" "return false;") $ monF enter
       let enter = Dom.keypress Dom.Enter (val ^. _1)
   pure $ val ^. _2

@@ -15,9 +15,9 @@ import           Control.Lens
 import           Control.Monad.Fix
 import           Reflex
 import           Reflex.Bulmex.Attr
-import qualified Reflex.Dom.Builder.Class as Dom
-import qualified Reflex.Dom.Widget.Basic  as Dom
-import qualified Reflex.Tags              as T
+import qualified Reflex.Dom.Builder.Class      as Dom
+import qualified Reflex.Dom.Widget.Basic       as Dom
+import qualified Reflex.Tags                   as T
 
 
 -- | A modal that opens on event and has a cross to close it.

@@ -7,11 +7,11 @@ module Reflex.Bulmex.Tag.Hide where
 
 import           Control.Applicative
 import           Data.Bool
-import qualified Data.Map.Strict          as Map
+import qualified Data.Map.Strict               as Map
 import           Reflex
 import           Reflex.Bulmex.Attr
-import qualified Reflex.Dom.Builder.Class as Dom
-import qualified Reflex.Tags              as T
+import qualified Reflex.Dom.Builder.Class      as Dom
+import qualified Reflex.Tags                   as T
 
 -- | When the dynamic is true the first monad is shown, otherwise the second.
 switchDiv

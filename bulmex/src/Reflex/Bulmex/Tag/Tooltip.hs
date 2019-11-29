@@ -11,12 +11,12 @@ module Reflex.Bulmex.Tag.Tooltip
   )
 where
 
-import qualified Data.Map.Strict          as Map
-import qualified Data.Text                as Text
+import qualified Data.Map.Strict               as Map
+import qualified Data.Text                     as Text
 import           Reflex
 import           Reflex.Bulmex.Attr
-import qualified Reflex.Dom.Builder.Class as Dom
-import qualified Reflex.Tags              as T
+import qualified Reflex.Dom.Builder.Class      as Dom
+import qualified Reflex.Tags                   as T
 
 data ToolDirection
   = Top -- top is graphic bugged
