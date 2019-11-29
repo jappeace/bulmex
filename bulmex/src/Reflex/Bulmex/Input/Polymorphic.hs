@@ -21,12 +21,12 @@ module Reflex.Bulmex.Input.Polymorphic
 where
 
 import           Control.Lens
-import qualified Data.Map.Strict               as Map
-import qualified Data.Text                     as Text
+import qualified Data.Map.Strict          as Map
+import qualified Data.Text                as Text
 import           Reflex
 import           Reflex.Dom.Builder.Class
 import           Reflex.Dom.Widget.Basic
-import qualified Reflex.Dom.Widget.Input       as Inp
+import qualified Reflex.Dom.Widget.Input  as Inp
 
 textInput
   :: (DomBuilder t m, PostBuild t m) => Inp.TextInputConfig t -> m (TextInput t)
@@ -96,7 +96,7 @@ instance Inp.HasValue (TextArea t) where
   value = _textArea_value
 
 textArea_keypress :: Lens' (TextArea t) (Event t Word)
-textArea_keypress f TextArea x1 x2 x3 x4 = TextArea x1 x2 x3 <$> f x4
+textArea_keypress f (TextArea x1 x2 x3 x4) = TextArea x1 x2 x3 <$> f x4
 
 textArea_value :: Lens' (TextArea t) (Dynamic t Text.Text)
 textArea_value f (TextArea x1 x2 x3 x4) = (\y -> TextArea y x2 x3 x4) <$> f x1
