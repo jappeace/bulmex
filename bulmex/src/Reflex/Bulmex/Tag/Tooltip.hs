@@ -8,14 +8,15 @@ module Reflex.Bulmex.Tag.Tooltip
   , tooltipText'
   , ToolDirection(..)
   , tipToAttr
-  ) where
+  )
+where
 
-import qualified Data.Map.Strict          as Map
-import qualified Data.Text                as Text
+import qualified Data.Map.Strict               as Map
+import qualified Data.Text                     as Text
 import           Reflex
 import           Reflex.Bulmex.Attr
-import qualified Reflex.Dom.Builder.Class as Dom
-import qualified Reflex.Tags              as T
+import qualified Reflex.Dom.Builder.Class      as Dom
+import qualified Reflex.Tags                   as T
 
 data ToolDirection
   = Top -- top is graphic bugged
@@ -25,18 +26,18 @@ data ToolDirection
 
 -- | balloon css, for example: https://cdnjs.cloudflare.com/ajax/libs/balloon-css/0.5.0/balloon.min.css
 --   uses a span underneath
-tooltipText ::
-     (PostBuild t m, Dom.DomBuilder t m) => Dynamic t Text.Text -> m a -> m a
+tooltipText
+  :: (PostBuild t m, Dom.DomBuilder t m) => Dynamic t Text.Text -> m a -> m a
 tooltipText = tooltipText' Rght
 
 -- | Allows setting of initial direction
-tooltipText' ::
-     (PostBuild t m, Dom.DomBuilder t m)
+tooltipText'
+  :: (PostBuild t m, Dom.DomBuilder t m)
   => ToolDirection
   -> Dynamic t Text.Text
   -> m a
   -> m a
-tooltipText' dir tipDyn monad = T.spanDynAttr (tipToAttr dir <$> tipDyn) $ monad
+tooltipText' dir tipDyn = T.spanDynAttr (tipToAttr dir <$> tipDyn)
 
 tipToAttr :: ToolDirection -> Text.Text -> AttrMap
 tipToAttr dir "" = tipToAttr dir "-"

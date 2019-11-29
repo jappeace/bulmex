@@ -10,11 +10,12 @@ module Reflex.Bulmex.Form.FormTypes
   , _PostDefault
   , _Loading
   , _FormRest
-  ) where
+  )
+where
 
 import           Control.Lens
 import           Data.Generics.Sum
-import           GHC.Generics      (Generic)
+import           GHC.Generics                   ( Generic )
 
 data FormAction
   = PostDefault -- ^ do the post
@@ -38,7 +39,7 @@ data FormState
 
 instance Semigroup FormState where
   (<>) FormStateRest FormStateRest = FormStateRest
-  (<>) _ _                         = FormStateSpinning
+  (<>) _             _             = FormStateSpinning
 
 instance Monoid FormState where
   mempty = FormStateRest

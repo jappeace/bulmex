@@ -41,3 +41,9 @@ hpack:
 
 sdist: update-cabal haddock
 	cabal new-sdist all
+
+brittany_:
+	$(shell set -x; for i in `fd hs`; do hlint --refactor --refactor-options=-i $$i; brittany --write-mode=inplace $$i; done)
+
+brittany:
+	nix-shell ./travis-shell.nix --run "make brittany_"

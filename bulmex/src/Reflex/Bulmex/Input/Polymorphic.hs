@@ -1,5 +1,5 @@
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecursiveDo       #-}
+
 {-# LANGUAGE TypeFamilies      #-}
 
 -- | This is just a copy of the upstream code except polymorphic:
@@ -17,38 +17,39 @@ module Reflex.Bulmex.Input.Polymorphic
   , textInput_keydown
   , textInput_input
   , textInput_hasFocus
-  ) where
+  )
+where
 
 import           Control.Lens
-import qualified Data.Map.Strict          as Map
-import qualified Data.Text                as Text
+import qualified Data.Map.Strict               as Map
+import qualified Data.Text                     as Text
 import           Reflex
 import           Reflex.Dom.Builder.Class
 import           Reflex.Dom.Widget.Basic
-import qualified Reflex.Dom.Widget.Input  as Inp
+import qualified Reflex.Dom.Widget.Input       as Inp
 
-textInput ::
-     (DomBuilder t m, PostBuild t m) => Inp.TextInputConfig t -> m (TextInput t)
+textInput
+  :: (DomBuilder t m, PostBuild t m) => Inp.TextInputConfig t -> m (TextInput t)
 textInput (Inp.TextInputConfig inputType initial eSetValue dAttrs) = do
-  modifyAttrs <-
-    dynamicAttributesToModifyAttributes $
-    fmap (Map.insert "type" inputType) dAttrs
+  modifyAttrs <- dynamicAttributesToModifyAttributes
+    $ fmap (Map.insert "type" inputType) dAttrs
   i <-
-    inputElement $ Inp.def & inputElementConfig_initialValue .~ initial &
-    inputElementConfig_setValue .~
-    eSetValue &
-    inputElementConfig_elementConfig .
-    elementConfig_modifyAttributes .~
-    fmap mapKeysToAttributeName modifyAttrs
-  return $
-    TextInput
-      { _textInput_value = _inputElement_value i
-      , _textInput_input = _inputElement_input i
-      , _textInput_keypress = domEvent Keypress i
-      , _textInput_keydown = domEvent Keydown i
-      , _textInput_keyup = domEvent Keyup i
-      , _textInput_hasFocus = _inputElement_hasFocus i
-      }
+    inputElement
+    $  Inp.def
+    &  inputElementConfig_initialValue
+    .~ initial
+    &  inputElementConfig_setValue
+    .~ eSetValue
+    &  inputElementConfig_elementConfig
+    .  elementConfig_modifyAttributes
+    .~ fmap mapKeysToAttributeName modifyAttrs
+  return $ TextInput { _textInput_value    = _inputElement_value i
+                     , _textInput_input    = _inputElement_input i
+                     , _textInput_keypress = domEvent Keypress i
+                     , _textInput_keydown  = domEvent Keydown i
+                     , _textInput_keyup    = domEvent Keyup i
+                     , _textInput_hasFocus = _inputElement_hasFocus i
+                     }
 
 data TextInput t = TextInput
   { _textInput_value    :: Dynamic t Text.Text
@@ -63,24 +64,25 @@ instance Inp.HasValue (TextInput t) where
   type Value (TextInput t) = Dynamic t Text.Text
   value = _textInput_value
 
-textArea ::
-     (DomBuilder t m, PostBuild t m) => Inp.TextAreaConfig t -> m (TextArea t)
+textArea
+  :: (DomBuilder t m, PostBuild t m) => Inp.TextAreaConfig t -> m (TextArea t)
 textArea (Inp.TextAreaConfig initial eSet attrs) = do
   modifyAttrs <- dynamicAttributesToModifyAttributes attrs
-  i <-
-    textAreaElement $ Inp.def & textAreaElementConfig_initialValue .~ initial &
-    textAreaElementConfig_setValue .~
-    eSet &
-    textAreaElementConfig_elementConfig .
-    elementConfig_modifyAttributes .~
-    fmap mapKeysToAttributeName modifyAttrs
-  return $
-    TextArea
-      { _textArea_value = _textAreaElement_value i
-      , _textArea_input = _textAreaElement_input i
-      , _textArea_keypress = domEvent Keypress i
-      , _textArea_hasFocus = _textAreaElement_hasFocus i
-      }
+  i           <-
+    textAreaElement
+    $  Inp.def
+    &  textAreaElementConfig_initialValue
+    .~ initial
+    &  textAreaElementConfig_setValue
+    .~ eSet
+    &  textAreaElementConfig_elementConfig
+    .  elementConfig_modifyAttributes
+    .~ fmap mapKeysToAttributeName modifyAttrs
+  return $ TextArea { _textArea_value    = _textAreaElement_value i
+                    , _textArea_input    = _textAreaElement_input i
+                    , _textArea_keypress = domEvent Keypress i
+                    , _textArea_hasFocus = _textAreaElement_hasFocus i
+                    }
 
 data TextArea t = TextArea
   { _textArea_value    :: Dynamic t Text.Text
@@ -94,15 +96,14 @@ instance Inp.HasValue (TextArea t) where
   value = _textArea_value
 
 textArea_keypress :: Lens' (TextArea t) (Event t Word)
-textArea_keypress f (TextArea x1 x2 x3 x4) =
-  (\y -> TextArea x1 x2 x3 y) <$> f x4
+textArea_keypress f (TextArea x1 x2 x3 x4) = TextArea x1 x2 x3 <$> f x4
 
 textArea_value :: Lens' (TextArea t) (Dynamic t Text.Text)
 textArea_value f (TextArea x1 x2 x3 x4) = (\y -> TextArea y x2 x3 x4) <$> f x1
 
 textInput_hasFocus :: Lens' (TextInput t) (Dynamic t Bool)
 textInput_hasFocus f (TextInput x1 x2 x3 x4 x5 x6) =
-  (\y -> TextInput x1 x2 x3 x4 x5 y) <$> f x6
+  TextInput x1 x2 x3 x4 x5 <$> f x6
 
 textInput_input :: Lens' (TextInput t) (Event t Text.Text)
 textInput_input f (TextInput x1 x2 x3 x4 x5 x6) =

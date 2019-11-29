@@ -4,9 +4,10 @@
 module Reflex.Bulmex.Space
   ( space
   , spaceJoin
-  ) where
+  )
+where
 
-import qualified Data.Text as Text
+import qualified Data.Text                     as Text
 
 space :: Text.Text
 space = " "
