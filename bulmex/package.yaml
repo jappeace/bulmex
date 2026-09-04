@@ -20,7 +20,7 @@ description: Bulma is a pure CSS framework. Because of that it can be easily use
             There are also some helper functions for common tasks.
             such as making server side rendering easier.
             Which is described in a related
-            [blogpost](https://jappieklooster.nl/reflex-server-side-html-rendering.html).
+            [blogpost](https://jappie.me/reflex-server-side-html-rendering.html).
 
 ghc-options: -Wall -Wcompat -Wincomplete-uni-patterns -Widentities
 

@@ -8,7 +8,7 @@ cabal-version:  >= 1.10
 name:           bulmex
 version:        4.0.0
 synopsis:       Reflex infused with bulma (css)
-description:    Bulma is a pure CSS framework. Because of that it can be easily used with reflex. This library realizes that combination. Bulma already provided styling for a [modal](https://bulma.io/documentation/components/modal/), we just [implemented](https://hackage.haskell.org/package/bulmex/docs/Reflex-Bulmex-Modal.html) it for you! There are also some helper functions for common tasks. such as making server side rendering easier. Which is described in a related [blogpost](https://jappieklooster.nl/reflex-server-side-html-rendering.html).
+description:    Bulma is a pure CSS framework. Because of that it can be easily used with reflex. This library realizes that combination. Bulma already provided styling for a [modal](https://bulma.io/documentation/components/modal/), we just [implemented](https://hackage.haskell.org/package/bulmex/docs/Reflex-Bulmex-Modal.html) it for you! There are also some helper functions for common tasks. such as making server side rendering easier. Which is described in a related [blogpost](https://jappie.me/reflex-server-side-html-rendering.html).
 category:       Web
 homepage:       https://github.com/jappeace/bulmex#readme
 bug-reports:    https://github.com/jappeace/bulmex/issues

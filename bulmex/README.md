@@ -1,4 +1,4 @@
-[![Jappiejappie](https://img.shields.io/badge/blog-jappieklooster.nl-lightgrey?style=for-the-badge)](https://jappieklooster.nl)
+[![Jappiejappie](https://img.shields.io/badge/blog-jappie.me-lightgrey?style=for-the-badge)](https://jappie.me)
 [![Build status](https://img.shields.io/travis/jappeace/bulmex?style=for-the-badge)](https://travis-ci.org/jappeace/bulmex/builds/)
 [![Jappiejappie](https://img.shields.io/badge/discord-jappiejappie-black?logo=discord&style=for-the-badge)](https://discord.gg/Hp4agqy)
 
@@ -12,7 +12,7 @@ it for you!
 There are also some helper functions for common tasks.
 such as making server side rendering easier.
 Which is described in a related
-[blogpost](https://jappieklooster.nl/reflex-server-side-html-rendering.html).
+[blogpost](https://jappie.me/reflex-server-side-html-rendering.html).
 
 ## Reflex
 - core: https://hackage.haskell.org/package/reflex

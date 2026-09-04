@@ -8,7 +8,7 @@
 -- | A root for an app,
 --   usefull for server side html rendering.
 --   has a neat api for the head tag, use this if that api suits your needs.
---   For more info see blogpost: https://jappieklooster.nl/reflex-server-side-html-rendering.html
+--   For more info see blogpost: https://jappie.me/reflex-server-side-html-rendering.html
 module Reflex.Bulmex.Html
   ( htmlWidget
   -- * Head tag stuff
